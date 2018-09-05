@@ -1,0 +1,22 @@
+{
+  "name": "ipfs-http-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --watch ../graphql-server --watch ../rest-server --watch . .",
+    "reset": "rm -rf package-lock.json && rm -rf yarn.lock && rm -rf node_modules"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "glue": "^5.0.0",
+    "ipfs-rest-server": "^1.0.0",
+    "ipfs-graphql-server": "^1.0.0"
+  },
+  "devDependencies": {
+    "aegir": "^15.1.0",
+    "nodemon": "^1.18.3"
+  }
+}

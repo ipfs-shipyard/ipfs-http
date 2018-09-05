@@ -1,0 +1,18 @@
+{
+  "name": "ipfs-http",
+  "version": "1.0.0",
+  "description": "A next-generation IPFS http/graphql interface",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "reset": "lerna run --parallel reset && rm -rf node_modules && rm -rf package-lock.json && rm -rf yarn.lock",
+    "test": "lerna run --parallel test",
+    "build": "lerna run --parallel build",
+    "deploy": "lerna run --parallel deploy",
+    "start": "NODE_ENV=development lerna run --parallel start",
+    "clean": "lerna run --parallel clean"
+  },
+  "devDependencies": {
+    "lerna": "^2.7.1"
+  }
+}
