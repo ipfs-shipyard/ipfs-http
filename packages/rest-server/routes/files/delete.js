@@ -5,9 +5,9 @@ const Joi = require('joi')
 module.exports = {
   method: 'DELETE',
   path: '/files/{path}',
-  config: {
+  options: {
     handler: (request, reply) => {
-      
+
     },
     description: 'Remove an MFS path',
     notes: 'Removes a directory or file from your MFS',

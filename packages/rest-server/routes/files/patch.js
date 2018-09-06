@@ -5,7 +5,7 @@ const Joi = require('joi')
 module.exports = {
   method: 'PATCH',
   path: '/files/{path}',
-  config: {
+  options: {
     handler: (request, reply) => {
 
     },

@@ -5,7 +5,7 @@ const Joi = require('joi')
 module.exports = {
   method: 'DELETE',
   path: '/dag/{cid}',
-  config: {
+  options: {
     handler: (request, reply) => {},
     description: 'Remove a DAG node from your local repo',
     notes: 'Removes a DAG node from your local repo',

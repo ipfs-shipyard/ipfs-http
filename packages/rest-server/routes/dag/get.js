@@ -15,7 +15,7 @@ const transformHash = require('../../utils/transform-hash')
 module.exports = {
   method: 'GET',
   path: '/dag/{cid}',
-  config: {
+  options: {
     handler: (request, reply) => {
       let promise
 

@@ -6,7 +6,7 @@ const mh = require('multihashes')
 module.exports = {
   method: 'POST',
   path: '/files/{path}',
-  config: {
+  options: {
     handler: (request, reply) => {
       if (request.body) {
         return request.server.app.ipfs.files.write(request.params.path, {

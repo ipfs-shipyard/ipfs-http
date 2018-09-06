@@ -5,7 +5,7 @@ const Joi = require('joi')
 module.exports = {
   method: 'PATCH',
   path: '/dag/{cid}',
-  config: {
+  options: {
     handler: (request, reply) => {},
     description: 'Update a DAG node',
     notes: 'Updates a DAG node with the passed CID',

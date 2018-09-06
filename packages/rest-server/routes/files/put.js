@@ -5,7 +5,7 @@ const Joi = require('joi')
 module.exports = {
   method: 'PUT',
   path: '/files/{path}',
-  config: {
+  options: {
     handler: (request, reply) => {},
     description: 'Update an MFS path',
     notes: 'Replace a file or directory at the passed MFS path',

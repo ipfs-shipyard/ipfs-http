@@ -18,7 +18,7 @@ const TYPES = [
 module.exports = {
   method: 'GET',
   path: '/files/{path}',
-  config: {
+  options: {
     handler: (request, reply) => {
       let promise
 

@@ -5,7 +5,7 @@ const Joi = require('joi')
 module.exports = {
   method: 'POST',
   path: '/dag/{cid}',
-  config: {
+  options: {
     handler: (request, reply) => {},
     description: 'Create a DAG node',
     notes: 'Resolves a DAG node with the passed CID',
