@@ -1,15 +1,15 @@
 'use strict'
 
-const Joi = require('joi')
-const CID = require('cids')
-const mh = require('multihashes')
 const {
   JSON,
   OCTET_STREAM,
   EVERYTHING
 } = require('../../utils/mime-types')
-const cidVersion = require('../../utils/validation/cid-version')
-const cidBase = require('../../utils/validation/cid-base')
+const {
+  Joi,
+  cidVersion,
+  cidBase
+} = require('../../utils/validation')
 const transformHash = require('../../utils/transform-hash')
 
 module.exports = {
@@ -63,8 +63,7 @@ module.exports = {
     validate: {
       params: {
         cid: Joi
-          .string()
-          .required()
+          .cid()
           .description('The CID that corresponds to the DAG node we wish to retrieve')
       },
       query: {
@@ -86,6 +85,11 @@ module.exports = {
       },
       options: {
         allowUnknown: true
+      }
+    },
+    plugins: {
+      'hapi-swagger': {
+        id: 'get'
       }
     }
   }

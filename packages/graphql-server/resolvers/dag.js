@@ -6,12 +6,12 @@ module.exports = {
   Query: {
     dagGet: async (root, { cid, cidBase = 'base58btc', cidVersion = 0 }) => {
       const ipfs = await client()
-
+console.info(ipfs)
       return ipfs
         .apis
         .dag
-        .getDagCid({
-          cid: cid,
+        .get({
+          cid,
           cidBase,
           cidVersion,
           headers: {

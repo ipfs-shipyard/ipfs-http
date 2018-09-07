@@ -2,6 +2,7 @@
 
 const CID = require('cids')
 const PeerId = require('peer-id')
+const Multiaddr = require('multiaddr')
 const cidBase = require('./cid-base')
 const cidVersion = require('./cid-version')
 
@@ -33,7 +34,24 @@ const Joi = require('joi')
 
         return value
       } catch (error) {
-        this.createError('peerId.invalid', { v: value }, state, options)
+        this.createError('peerId.invalidPeerId', { v: value }, state, options)
+      }
+    }
+  }))
+  .extend((joi) => ({
+    name: 'multiaddr',
+    base: joi.string(),
+    language: {
+      invalidMultiaddr: 'Invalid multiaddr'
+    },
+    coerce: (value, state, options) => {
+      try {
+        value = value.toString()
+        new Multiaddr(value)
+
+        return value
+      } catch (error) {
+        this.createError('multiaddr.invalidMultiaddr', { v: value }, state, options)
       }
     }
   }))

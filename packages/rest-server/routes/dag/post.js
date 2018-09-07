@@ -1,6 +1,8 @@
 'use strict'
 
-const Joi = require('joi')
+const {
+  Joi,
+} = require('../../utils/validation')
 
 module.exports = {
   method: 'POST',
@@ -13,9 +15,13 @@ module.exports = {
     validate: {
       params: {
         cid: Joi
-          .string()
-          .required()
+          .cid()
           .description('The CID that corresponds to the DAG node we wish to create')
+      }
+    },
+    plugins: {
+      'hapi-swagger': {
+        id: 'create'
       }
     }
   }
