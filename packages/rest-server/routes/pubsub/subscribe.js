@@ -3,35 +3,41 @@
 const {
   JSON,
   OCTET_STREAM,
-  EVERYTHING,
-  PEM
+  EVERYTHING
 } = require('../../utils/mime-types')
 const {
-  Joi,
-  stream
+  Joi
 } = require('../../utils/validation')
 
 module.exports = {
   method: 'POST',
-  path: '/key',
+  path: '/pubsub/topics',
   options: {
     handler: (request, reply) => {
-      return null
+      return request.server.app.ipfs.pubsub.subscribe(request.payload.topic, (message) => {
+        
+      }, {
+        discover: request.payload.discover
+      }, (error) => {
+        if (error) {
+          reply.reponse(error)
+        }
+      })
     },
-    description: 'Create a new keypair',
+    description: 'Returns the list of topics the peer is subscribed to',
     tags: ['api'],
     validate: {
       payload: {
-        name: Joi.string().required(),
-        pem: Joi
+        topic: Joi
           .string()
-          .description('base64 encoded PKCS #8 PEM file to import keypairs from'),
-        password: Joi
-          .string()
-          .description('Password to PKCS #8 PEM file'),
+          .required(),
+        discover: Joi
+          .boolean()
+          .default(false)
       },
       headers: {
-        accept: Joi.string()
+        accept: Joi
+          .string()
           .default(JSON)
           .valid([
             JSON,
@@ -44,7 +50,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'generate'
+        id: 'subscribe'
       }
     }
   }

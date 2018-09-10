@@ -16,7 +16,7 @@ module.exports = {
     handler: (request, reply) => {
       return request.server.app.ipfs.key.list()
     },
-    description: 'List all the keys',
+    description: 'List all local keypairs',
     tags: ['api'],
     validate: {
       headers: {
@@ -33,7 +33,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'get'
+        id: 'list'
       }
     }
   }

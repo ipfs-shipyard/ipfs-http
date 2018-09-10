@@ -2,7 +2,6 @@
 
 const Joi = require('joi')
 const CID = require('cids')
-const mh = require('multihashes')
 const {
   JSON,
   OCTET_STREAM,

@@ -1,7 +1,6 @@
 'use strict'
 
 const CID = require('cids')
-const mh = require('multihashes')
 const {
   Joi,
   cidVersion,

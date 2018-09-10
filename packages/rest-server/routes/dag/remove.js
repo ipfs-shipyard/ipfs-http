@@ -1,6 +1,8 @@
 'use strict'
 
-const Joi = require('joi')
+const {
+  Joi
+} = require('../../utils/validation')
 
 module.exports = {
   method: 'DELETE',

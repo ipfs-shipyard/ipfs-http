@@ -13,7 +13,7 @@ const Joi = require('joi')
     language: {
       invalidCid: 'Invalid CID'
     },
-    coerce: (value, state, options) => {
+    coerce: function (value, state, options) {
       try {
         return new CID(value)
       } catch (error) {
@@ -27,7 +27,7 @@ const Joi = require('joi')
     language: {
       invalidPeerId: 'Invalid Peer ID'
     },
-    coerce: (value, state, options) => {
+    coerce: function (value, state, options) {
       try {
         value = value.toString()
         PeerId.createFromB58String(value)

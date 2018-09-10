@@ -23,7 +23,11 @@ const getIpfs = async (options) => {
   return new Promise((resolve, reject) => {
     log(`Starting an IPFS instance`)
 
-    const ipfs = new IPFS()
+    const ipfs = new IPFS({
+      EXPERIMENTAL: {
+        pubsub: true
+      }
+    })
     ipfs.once('ready', () => resolve(ipfs))
     ipfs.once('error', (error) => reject(error))
   })

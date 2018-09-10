@@ -1,7 +1,8 @@
 'use strict',
 
 module.exports = [
-  require('./delete'),
+  require('./remove'),
   require('./get'),
-  require('./post')
+  require('./create'),
+  require('./update')
 ]

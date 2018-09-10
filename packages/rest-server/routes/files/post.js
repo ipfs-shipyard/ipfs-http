@@ -1,6 +1,9 @@
 'use strict'
 
-const Joi = require('joi')
+const {
+  Joi,
+  cidVersion
+} = require('../../utils/validation')
 const mh = require('multihashes')
 
 module.exports = {
@@ -33,12 +36,7 @@ module.exports = {
           .boolean()
           .default(false)
           .describe('Make parent directories as needed'),
-        cidVersion: Joi
-          .number()
-          .integer()
-          .positive()
-          .default(0)
-          .describe('CID version to use'),
+        cidVersion: cidVersion,
         hash: Joi
           .string()
           .valid(Object.keys(mh.names))
