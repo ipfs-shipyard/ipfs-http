@@ -11,10 +11,10 @@ const {
 
 module.exports = {
   method: 'POST',
-  path: '/ipns/{value}',
+  path: '/name',
   options: {
     handler: (request, reply) => {
-      return request.server.app.ipfs.name.publish(request.params.value, {
+      return request.server.app.ipfs.name.publish(request.payload.value, {
         resolve: request.payload.recursive,
         lifetime: request.payload.lifetime,
         ttl: request.payload.ttl,
@@ -24,12 +24,10 @@ module.exports = {
     description: 'Publish an IPNS name with a given value',
     tags: ['api'],
     validate: {
-      params: {
+      payload: Joi.object({
         value: Joi
           .string()
-          .required()
-      },
-      payload: Joi.object({
+          .required(),
         resolve: Joi
           .boolean()
           .default(false)

@@ -17,9 +17,7 @@ module.exports = {
   path: '/bitswap/ledger/{peerId}',
   options: {
     handler: (request, reply) => {
-      // return request.server.app.ipfs.bitswap.ledger(request.params.peerId)
-
-      return reply.response().code(404)
+      return request.server.app.ipfs.bitswap.ledger(request.params.peerId)
     },
     description: 'Show the current ledger for a peer',
     tags: ['api'],
@@ -27,6 +25,7 @@ module.exports = {
       params: {
         peerId: Joi
           .peerId()
+          .required()
       },
       query: {
         cidBase,

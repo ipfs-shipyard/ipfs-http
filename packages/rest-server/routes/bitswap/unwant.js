@@ -18,7 +18,6 @@ module.exports = {
   path: '/bitswap/wantlist/{cid}',
   options: {
     handler: (request, reply) => {
-      console.info(request.params.cid)
       return request.server.app.ipfs.bitswap.unwant(request.params.cid)
         .then(() => reply.response().code(204))
     },
@@ -28,6 +27,7 @@ module.exports = {
       params: {
         cid: Joi
           .cid()
+          .required()
           .description('The CID to remove from the wantlist')
       },
       options: {

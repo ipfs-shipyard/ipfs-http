@@ -44,8 +44,10 @@ module.exports = {
       options: {
         info: {
           title: 'IPFS API Documentation',
-          version: pkg.version
+          version: pkg.version,
         },
+        sortTags: 'name',
+        sortEndpoints: 'path',
         definitionPrefix: 'useLabel'
       }
     }])

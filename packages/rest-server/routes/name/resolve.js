@@ -11,10 +11,9 @@ const {
 
 module.exports = {
   method: 'GET',
-  path: '/ipns/{name}',
+  path: '/name/{name}',
   options: {
     handler: (request, reply) => {
-      console.info(Object.keys(request.server.app.ipfs))
       return request.server.app.ipfs.name.resolve(request.params.name, {
         recursive: request.query.recursive,
         nocache: request.query.nocache
