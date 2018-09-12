@@ -76,12 +76,14 @@ module.exports = {
                 'direct',
                 'indirect'
               ])
-          }).label('pin')).label('pins')
+          })
+            .label('pin')
+          ).label('pins')
       }
     },
     plugins: {
       'hapi-swagger': {
-        id: 'list',
+        id: 'pin.list',
         responses: {
           404: {
             description: 'The DNS name could not be resolved'

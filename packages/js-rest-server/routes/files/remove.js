@@ -48,6 +48,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
+        id: 'files.remove',
         responses: {
           204: {
             description: 'The file or directory was deleted'

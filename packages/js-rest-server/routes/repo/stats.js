@@ -68,7 +68,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'stats'
+        id: 'repo.stats'
       }
     }
   }

@@ -13,32 +13,32 @@ import (
 	"net/http"
 )
 
-// Ledger - Show the current ledger for a peer
-func Ledger(w http.ResponseWriter, r *http.Request) {
+// BitswapLedger - Show the current ledger for a peer
+func BitswapLedger(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Reprovide - Trigger reprovider
-func Reprovide(w http.ResponseWriter, r *http.Request) {
+// BitswapReprovide - Trigger reprovider
+func BitswapReprovide(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Stats - Show diagnostic information on the bitswap agent
-func Stats(w http.ResponseWriter, r *http.Request) {
+// BitswapStats - Show diagnostic information on the bitswap agent
+func BitswapStats(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Unwant - Remove a given block from your wantlist
-func Unwant(w http.ResponseWriter, r *http.Request) {
+// BitswapUnwant - Remove a given block from your wantlist
+func BitswapUnwant(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Wantlist - Show blocks currently on the wantlist
-func Wantlist(w http.ResponseWriter, r *http.Request) {
+// BitswapWantlist - Show blocks currently on the wantlist
+func BitswapWantlist(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

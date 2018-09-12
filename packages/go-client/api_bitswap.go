@@ -30,18 +30,18 @@ type BitswapApiService service
 BitswapApiService Show the current ledger for a peer
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param peerId
- * @param optional nil or *LedgerOpts - Optional Parameters:
+ * @param optional nil or *BitswapLedgerOpts - Optional Parameters:
  * @param "CidBase" (optional.String) -  Which number base to use when returning a CID
  * @param "CidVersion" (optional.Int32) -  Which CID version to use
 @return BitswapLedger
 */
 
-type LedgerOpts struct {
+type BitswapLedgerOpts struct {
     CidBase optional.String
     CidVersion optional.Int32
 }
 
-func (a *BitswapApiService) Ledger(ctx context.Context, peerId string, localVarOptionals *LedgerOpts) (BitswapLedger, *http.Response, error) {
+func (a *BitswapApiService) BitswapLedger(ctx context.Context, peerId string, localVarOptionals *BitswapLedgerOpts) (BitswapLedger, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -132,7 +132,7 @@ BitswapApiService Trigger reprovider
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return string
 */
-func (a *BitswapApiService) Reprovide(ctx context.Context) (string, *http.Response, error) {
+func (a *BitswapApiService) BitswapReprovide(ctx context.Context) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -214,18 +214,18 @@ func (a *BitswapApiService) Reprovide(ctx context.Context) (string, *http.Respon
 /*
 BitswapApiService Show diagnostic information on the bitswap agent
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *StatsOpts - Optional Parameters:
+ * @param optional nil or *BitswapStatsOpts - Optional Parameters:
  * @param "CidBase" (optional.String) -  Which number base to use when returning a CID
  * @param "CidVersion" (optional.Int32) -  Which CID version to use
 @return BitswapStats
 */
 
-type StatsOpts struct {
+type BitswapStatsOpts struct {
     CidBase optional.String
     CidVersion optional.Int32
 }
 
-func (a *BitswapApiService) Stats(ctx context.Context, localVarOptionals *StatsOpts) (BitswapStats, *http.Response, error) {
+func (a *BitswapApiService) BitswapStats(ctx context.Context, localVarOptionals *BitswapStatsOpts) (BitswapStats, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -315,7 +315,7 @@ BitswapApiService Remove a given block from your wantlist
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cid The CID to remove from the wantlist
 */
-func (a *BitswapApiService) Unwant(ctx context.Context, cid string) (*http.Response, error) {
+func (a *BitswapApiService) BitswapUnwant(ctx context.Context, cid string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody     interface{}
@@ -379,20 +379,20 @@ func (a *BitswapApiService) Unwant(ctx context.Context, cid string) (*http.Respo
 /*
 BitswapApiService Show blocks currently on the wantlist
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *WantlistOpts - Optional Parameters:
+ * @param optional nil or *BitswapWantlistOpts - Optional Parameters:
  * @param "CidBase" (optional.String) -  Which number base to use when returning a CID
  * @param "CidVersion" (optional.Int32) -  Which CID version to use
  * @param "PeerId" (optional.String) -  Filter the wantlist by this peer ID
 @return Peers
 */
 
-type WantlistOpts struct {
+type BitswapWantlistOpts struct {
     CidBase optional.String
     CidVersion optional.Int32
     PeerId optional.String
 }
 
-func (a *BitswapApiService) Wantlist(ctx context.Context, localVarOptionals *WantlistOpts) (Peers, *http.Response, error) {
+func (a *BitswapApiService) BitswapWantlist(ctx context.Context, localVarOptionals *BitswapWantlistOpts) (Peers, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}

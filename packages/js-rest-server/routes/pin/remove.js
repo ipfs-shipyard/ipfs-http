@@ -47,7 +47,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'remove',
+        id: 'pin.remove',
         responses: {
           204: {
             description: 'The pin was removed'

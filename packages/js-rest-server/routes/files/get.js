@@ -157,8 +157,6 @@ module.exports = {
             .integer(),
           contents: Joi
             .array()
-            .notes(['note1', 'note2'])
-            .description('a descripiton')
             .items(Joi.object({
               name: Joi
                 .string()
@@ -172,6 +170,11 @@ module.exports = {
             }).label('unixfs-entry-summary')
           )
         }).label('unixfs-entry')
+      }
+    },
+    plugins: {
+      'hapi-swagger': {
+        id: 'files.get'
       }
     }
   }

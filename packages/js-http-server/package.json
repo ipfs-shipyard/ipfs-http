@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch ../graphql-server --watch ../rest-server --watch . .",
+    "start": "nodemon --watch ../js-graphql-server --watch ../js-rest-server --watch . .",
     "reset": "rm -rf package-lock.json && rm -rf yarn.lock && rm -rf node_modules"
   },
   "author": "",

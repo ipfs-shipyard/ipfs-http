@@ -4,14 +4,14 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Generate**](KeyApi.md#Generate) | **Post** /key | Create a new keypair
-[**List**](KeyApi.md#List) | **Get** /key | List all local keypairs
-[**Remove**](KeyApi.md#Remove) | **Delete** /key/{name} | Remove a keypair
-[**Rename**](KeyApi.md#Rename) | **Patch** /key/{name} | Rename a keypair
+[**KeyGenerate**](KeyApi.md#KeyGenerate) | **Post** /key | Create a new keypair
+[**KeyList**](KeyApi.md#KeyList) | **Get** /key | List all local keypairs
+[**KeyRemove**](KeyApi.md#KeyRemove) | **Delete** /key/{name} | Remove a keypair
+[**KeyRename**](KeyApi.md#KeyRename) | **Patch** /key/{name} | Rename a keypair
 
 
-# **Generate**
-> string Generate(ctx, optional)
+# **KeyGenerate**
+> string KeyGenerate(ctx, optional)
 Create a new keypair
 
 ### Required Parameters
@@ -19,10 +19,10 @@ Create a new keypair
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***GenerateOpts** | optional parameters | nil if no parameters
+ **optional** | ***KeyGenerateOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a GenerateOpts struct
+Optional parameters are passed through a pointer to a KeyGenerateOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -43,8 +43,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **List**
-> string List(ctx, )
+# **KeyList**
+> string KeyList(ctx, )
 List all local keypairs
 
 ### Required Parameters
@@ -65,8 +65,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Remove**
-> string Remove(ctx, name)
+# **KeyRemove**
+> string KeyRemove(ctx, name)
 Remove a keypair
 
 ### Required Parameters
@@ -91,8 +91,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Rename**
-> string Rename(ctx, name, optional)
+# **KeyRename**
+> string KeyRename(ctx, name, optional)
 Rename a keypair
 
 ### Required Parameters
@@ -101,10 +101,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **name** | **string**|  | 
- **optional** | ***RenameOpts** | optional parameters | nil if no parameters
+ **optional** | ***KeyRenameOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a RenameOpts struct
+Optional parameters are passed through a pointer to a KeyRenameOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------

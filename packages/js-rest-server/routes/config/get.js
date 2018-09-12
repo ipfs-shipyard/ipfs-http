@@ -15,7 +15,7 @@ module.exports = {
     tags: ['api'],
     plugins: {
       'hapi-swagger': {
-        id: 'get'
+        id: 'config.get'
       }
     }
   }

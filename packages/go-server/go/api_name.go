@@ -13,14 +13,14 @@ import (
 	"net/http"
 )
 
-// Publish - Publish an IPNS name with a given value
-func Publish(w http.ResponseWriter, r *http.Request) {
+// NamePublish - Publish an IPNS name with a given value
+func NamePublish(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Resolve - Resolve an IPNS name
-func Resolve(w http.ResponseWriter, r *http.Request) {
+// NameResolve - Resolve an IPNS name
+func NameResolve(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Dns**](DnsApi.md#Dns) | **Get** /dns/{path} | Resolve DNS links
+[**MiscellaneousDns**](DnsApi.md#MiscellaneousDns) | **Get** /dns/{path} | Resolve DNS links
 
 
-# **Dns**
-> string Dns(ctx, path)
+# **MiscellaneousDns**
+> string MiscellaneousDns(ctx, path)
 Resolve DNS links
 
 ### Required Parameters

@@ -19,6 +19,12 @@ module.exports = {
     description: 'Close a connection to a given address',
     tags: ['api'],
     validate: {
+      params: {
+        address: Joi
+          .multiaddr()
+          .required()
+          .description('The address of the peer to disconnect from')
+      },
       headers: {
         accept: Joi
           .string()
@@ -59,7 +65,7 @@ module.exports = {
     },*/
     plugins: {
       'hapi-swagger': {
-        id: 'addrs'
+        id: 'swarm.disconnect'
       }
     }
   }

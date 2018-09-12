@@ -29,7 +29,7 @@ PubsubApiService Returns the list of topics the peer is subscribed to
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return string
 */
-func (a *PubsubApiService) List(ctx context.Context) (string, *http.Response, error) {
+func (a *PubsubApiService) PubsubList(ctx context.Context) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -111,16 +111,16 @@ func (a *PubsubApiService) List(ctx context.Context) (string, *http.Response, er
 /*
 PubsubApiService Returns the list of topics the peer is subscribed to
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *SubscribeOpts - Optional Parameters:
+ * @param optional nil or *PubsubSubscribeOpts - Optional Parameters:
  * @param "SubscribeToPubsubTopicPayload" (optional.Interface of SubscribeToPubsubTopicPayload) - 
 @return string
 */
 
-type SubscribeOpts struct {
+type PubsubSubscribeOpts struct {
     SubscribeToPubsubTopicPayload optional.Interface
 }
 
-func (a *PubsubApiService) Subscribe(ctx context.Context, localVarOptionals *SubscribeOpts) (string, *http.Response, error) {
+func (a *PubsubApiService) PubsubSubscribe(ctx context.Context, localVarOptionals *PubsubSubscribeOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}

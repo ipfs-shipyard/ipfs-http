@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**List**](PubsubApi.md#List) | **Get** /pubsub/topics | Returns the list of topics the peer is subscribed to
-[**Subscribe**](PubsubApi.md#Subscribe) | **Post** /pubsub/topics | Returns the list of topics the peer is subscribed to
+[**PubsubList**](PubsubApi.md#PubsubList) | **Get** /pubsub/topics | Returns the list of topics the peer is subscribed to
+[**PubsubSubscribe**](PubsubApi.md#PubsubSubscribe) | **Post** /pubsub/topics | Returns the list of topics the peer is subscribed to
 
 
-# **List**
-> string List(ctx, )
+# **PubsubList**
+> string PubsubList(ctx, )
 Returns the list of topics the peer is subscribed to
 
 ### Required Parameters
@@ -30,8 +30,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Subscribe**
-> string Subscribe(ctx, optional)
+# **PubsubSubscribe**
+> string PubsubSubscribe(ctx, optional)
 Returns the list of topics the peer is subscribed to
 
 ### Required Parameters
@@ -39,10 +39,10 @@ Returns the list of topics the peer is subscribed to
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***SubscribeOpts** | optional parameters | nil if no parameters
+ **optional** | ***PubsubSubscribeOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a SubscribeOpts struct
+Optional parameters are passed through a pointer to a PubsubSubscribeOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------

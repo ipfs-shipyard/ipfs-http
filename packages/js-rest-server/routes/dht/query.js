@@ -25,6 +25,7 @@ module.exports = {
       params: {
         peerId: Joi
           .peerId()
+          .required()
           .description('An IPFS/libp2p peer ID')
       },
       headers: {
@@ -41,7 +42,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'query'
+        id: 'dht.query'
       }
     }
   }

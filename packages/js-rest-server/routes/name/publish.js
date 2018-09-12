@@ -68,7 +68,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'publish'
+        id: 'name.publish'
       }
     }
   }

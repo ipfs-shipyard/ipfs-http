@@ -11,7 +11,7 @@ const {
 
 module.exports = {
   method: 'POST',
-  path: '/dht/{cid}',
+  path: '/dht/{key}',
   options: {
     handler: (request, reply) => {
       return request.server.app.ipfs.dht.put(request.params.key, request.payload)
@@ -27,6 +27,7 @@ module.exports = {
       params: {
         key: Joi
           .cid()
+          .required()
           .description('The content id you are storing')
       },
       headers: {
@@ -43,7 +44,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'put'
+        id: 'dht.put'
       }
     }
   }

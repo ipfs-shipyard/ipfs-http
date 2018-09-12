@@ -28,16 +28,16 @@ type KeyApiService service
 /*
 KeyApiService Create a new keypair
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *GenerateOpts - Optional Parameters:
+ * @param optional nil or *KeyGenerateOpts - Optional Parameters:
  * @param "GenerateKeypairPayload" (optional.Interface of GenerateKeypairPayload) - 
 @return string
 */
 
-type GenerateOpts struct {
+type KeyGenerateOpts struct {
     GenerateKeypairPayload optional.Interface
 }
 
-func (a *KeyApiService) Generate(ctx context.Context, localVarOptionals *GenerateOpts) (string, *http.Response, error) {
+func (a *KeyApiService) KeyGenerate(ctx context.Context, localVarOptionals *KeyGenerateOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -130,7 +130,7 @@ KeyApiService List all local keypairs
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return string
 */
-func (a *KeyApiService) List(ctx context.Context) (string, *http.Response, error) {
+func (a *KeyApiService) KeyList(ctx context.Context) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -215,7 +215,7 @@ KeyApiService Remove a keypair
  * @param name
 @return string
 */
-func (a *KeyApiService) Remove(ctx context.Context, name string) (string, *http.Response, error) {
+func (a *KeyApiService) KeyRemove(ctx context.Context, name string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody     interface{}
@@ -299,16 +299,16 @@ func (a *KeyApiService) Remove(ctx context.Context, name string) (string, *http.
 KeyApiService Rename a keypair
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param name
- * @param optional nil or *RenameOpts - Optional Parameters:
+ * @param optional nil or *KeyRenameOpts - Optional Parameters:
  * @param "RenameKeypairPayload" (optional.Interface of RenameKeypairPayload) - 
 @return string
 */
 
-type RenameOpts struct {
+type KeyRenameOpts struct {
     RenameKeypairPayload optional.Interface
 }
 
-func (a *KeyApiService) Rename(ctx context.Context, name string, localVarOptionals *RenameOpts) (string, *http.Response, error) {
+func (a *KeyApiService) KeyRename(ctx context.Context, name string, localVarOptionals *KeyRenameOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody     interface{}

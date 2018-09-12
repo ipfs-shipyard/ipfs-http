@@ -19,7 +19,7 @@ module.exports = {
     tags: ['api'],
     plugins: {
       'hapi-swagger': {
-        id: 'reset'
+        id: 'config.reset'
       }
     }
   }

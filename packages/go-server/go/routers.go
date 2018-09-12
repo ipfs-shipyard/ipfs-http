@@ -56,310 +56,310 @@ var routes = Routes{
 	},
 
 	{
-		"Ledger",
+		"BitswapLedger",
 		strings.ToUpper("Get"),
 		"//bitswap/ledger/{peerId}",
-		Ledger,
+		BitswapLedger,
 	},
 
 	{
-		"Reprovide",
+		"BitswapReprovide",
 		strings.ToUpper("Post"),
 		"//bitswap/reprovide",
-		Reprovide,
+		BitswapReprovide,
 	},
 
 	{
-		"Stats",
+		"BitswapStats",
 		strings.ToUpper("Get"),
 		"//bitswap/stats",
-		Stats,
+		BitswapStats,
 	},
 
 	{
-		"Unwant",
+		"BitswapUnwant",
 		strings.ToUpper("Delete"),
 		"//bitswap/wantlist/{cid}",
-		Unwant,
+		BitswapUnwant,
 	},
 
 	{
-		"Wantlist",
+		"BitswapWantlist",
 		strings.ToUpper("Get"),
 		"//bitswap/wantlist",
-		Wantlist,
+		BitswapWantlist,
 	},
 
 	{
-		"Get",
+		"ConfigGet",
 		strings.ToUpper("Get"),
 		"//config",
-		Get,
+		ConfigGet,
 	},
 
 	{
-		"Patch",
+		"ConfigPatch",
 		strings.ToUpper("Patch"),
 		"//config",
-		Patch,
+		ConfigPatch,
 	},
 
 	{
-		"Replace",
+		"ConfigReplace",
 		strings.ToUpper("Put"),
 		"//config",
-		Replace,
+		ConfigReplace,
 	},
 
 	{
-		"Reset",
+		"ConfigReset",
 		strings.ToUpper("Delete"),
 		"//config",
-		Reset,
+		ConfigReset,
 	},
 
 	{
-		"Create",
+		"DagCreate",
 		strings.ToUpper("Post"),
 		"//dag",
-		Create,
+		DagCreate,
 	},
 
 	{
-		"Get",
+		"DagGet",
 		strings.ToUpper("Get"),
 		"//dag/{cid}",
-		Get,
+		DagGet,
 	},
 
 	{
-		"Remove",
+		"DagRemove",
 		strings.ToUpper("Delete"),
 		"//dag/{cid}",
-		Remove,
+		DagRemove,
 	},
 
 	{
-		"Update",
+		"DagUpdate",
 		strings.ToUpper("Patch"),
 		"//dag/{cid}",
-		Update,
+		DagUpdate,
 	},
 
 	{
-		"FindPeer",
+		"DhtFindPeer",
 		strings.ToUpper("Get"),
 		"//dht/peer/{peerId}",
-		FindPeer,
+		DhtFindPeer,
 	},
 
 	{
-		"FindProviders",
+		"DhtFindProviders",
 		strings.ToUpper("Get"),
 		"//dht/providers/{cid}",
-		FindProviders,
+		DhtFindProviders,
 	},
 
 	{
-		"Get",
+		"DhtGet",
 		strings.ToUpper("Get"),
 		"//dht/{key}",
-		Get,
+		DhtGet,
 	},
 
 	{
-		"Provide",
+		"DhtProvide",
 		strings.ToUpper("Post"),
 		"//dht/provide",
-		Provide,
+		DhtProvide,
 	},
 
 	{
-		"Put",
+		"DhtPut",
 		strings.ToUpper("Post"),
-		"//dht/{cid}",
-		Put,
+		"//dht/{key}",
+		DhtPut,
 	},
 
 	{
-		"Query",
+		"DhtQuery",
 		strings.ToUpper("Get"),
 		"//dht/query/{peerId}",
-		Query,
+		DhtQuery,
 	},
 
 	{
-		"Dns",
+		"MiscellaneousDns",
 		strings.ToUpper("Get"),
 		"//dns/{path}",
-		Dns,
+		MiscellaneousDns,
 	},
 
 	{
-		"DeleteFilesPath",
-		strings.ToUpper("Delete"),
-		"//files/{path}",
-		DeleteFilesPath,
-	},
-
-	{
-		"GetFilesPath",
-		strings.ToUpper("Get"),
-		"//files/{path}",
-		GetFilesPath,
-	},
-
-	{
-		"PatchFilesPath",
-		strings.ToUpper("Patch"),
-		"//files/{path}",
-		PatchFilesPath,
-	},
-
-	{
-		"PostFilesPath",
+		"FilesCreate",
 		strings.ToUpper("Post"),
 		"//files/{path}",
-		PostFilesPath,
+		FilesCreate,
 	},
 
 	{
-		"PutFilesPath",
+		"FilesGet",
+		strings.ToUpper("Get"),
+		"//files/{path}",
+		FilesGet,
+	},
+
+	{
+		"FilesRemove",
+		strings.ToUpper("Delete"),
+		"//files/{path}",
+		FilesRemove,
+	},
+
+	{
+		"FilesReplace",
 		strings.ToUpper("Put"),
 		"//files/{path}",
-		PutFilesPath,
+		FilesReplace,
 	},
 
 	{
-		"Generate",
+		"FilesUpdate",
+		strings.ToUpper("Patch"),
+		"//files/{path}",
+		FilesUpdate,
+	},
+
+	{
+		"KeyGenerate",
 		strings.ToUpper("Post"),
 		"//key",
-		Generate,
+		KeyGenerate,
 	},
 
 	{
-		"List",
+		"KeyList",
 		strings.ToUpper("Get"),
 		"//key",
-		List,
+		KeyList,
 	},
 
 	{
-		"Remove",
+		"KeyRemove",
 		strings.ToUpper("Delete"),
 		"//key/{name}",
-		Remove,
+		KeyRemove,
 	},
 
 	{
-		"Rename",
+		"KeyRename",
 		strings.ToUpper("Patch"),
 		"//key/{name}",
-		Rename,
+		KeyRename,
 	},
 
 	{
-		"Publish",
+		"NamePublish",
 		strings.ToUpper("Post"),
 		"//name",
-		Publish,
+		NamePublish,
 	},
 
 	{
-		"Resolve",
+		"NameResolve",
 		strings.ToUpper("Get"),
 		"//name/{name}",
-		Resolve,
+		NameResolve,
 	},
 
 	{
-		"Add",
+		"PinAdd",
 		strings.ToUpper("Post"),
 		"//pins",
-		Add,
+		PinAdd,
 	},
 
 	{
-		"List",
+		"PinList",
 		strings.ToUpper("Get"),
 		"//pins",
-		List,
+		PinList,
 	},
 
 	{
-		"Remove",
+		"PinRemove",
 		strings.ToUpper("Delete"),
 		"//pins/{hash}",
-		Remove,
+		PinRemove,
 	},
 
 	{
-		"List",
+		"PubsubList",
 		strings.ToUpper("Get"),
 		"//pubsub/topics",
-		List,
+		PubsubList,
 	},
 
 	{
-		"Subscribe",
+		"PubsubSubscribe",
 		strings.ToUpper("Post"),
 		"//pubsub/topics",
-		Subscribe,
+		PubsubSubscribe,
 	},
 
 	{
-		"List",
+		"RepoGc",
 		strings.ToUpper("Post"),
 		"//repo/gc",
-		List,
+		RepoGc,
 	},
 
 	{
-		"Stats",
+		"RepoStats",
 		strings.ToUpper("Get"),
 		"//repo",
-		Stats,
+		RepoStats,
 	},
 
 	{
-		"Addrs",
+		"SwarmAddrs",
 		strings.ToUpper("Get"),
 		"//swarm/connections",
-		Addrs,
+		SwarmAddrs,
 	},
 
 	{
-		"Addrs_0",
+		"SwarmConnect",
 		strings.ToUpper("Post"),
 		"//swarm/connections",
-		Addrs_0,
+		SwarmConnect,
 	},
 
 	{
-		"Addrs_1",
-		strings.ToUpper("Get"),
-		"//swarm/peers",
-		Addrs_1,
-	},
-
-	{
-		"Addrs_2",
+		"SwarmDisconnect",
 		strings.ToUpper("Delete"),
 		"//swarm/connections/{address}",
-		Addrs_2,
+		SwarmDisconnect,
 	},
 
 	{
-		"Dns",
-		strings.ToUpper("Post"),
-		"//swarm/peers/{peerId}/ping",
-		Dns,
-	},
-
-	{
-		"Info",
+		"SwarmInfo",
 		strings.ToUpper("Get"),
 		"//swarm/peer",
-		Info,
+		SwarmInfo,
+	},
+
+	{
+		"SwarmPeers",
+		strings.ToUpper("Get"),
+		"//swarm/peers",
+		SwarmPeers,
+	},
+
+	{
+		"SwarmPing",
+		strings.ToUpper("Post"),
+		"//swarm/peers/{peerId}/ping",
+		SwarmPing,
 	},
 }

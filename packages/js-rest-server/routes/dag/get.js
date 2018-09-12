@@ -102,7 +102,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'get'
+        id: 'dag.get'
       }
     }
   }

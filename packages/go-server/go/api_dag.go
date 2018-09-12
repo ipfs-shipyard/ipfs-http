@@ -13,26 +13,26 @@ import (
 	"net/http"
 )
 
-// Create - Store an IPLD format node
-func Create(w http.ResponseWriter, r *http.Request) {
+// DagCreate - Store an IPLD format node
+func DagCreate(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Get - Get a DAG node
-func Get(w http.ResponseWriter, r *http.Request) {
+// DagGet - Get a DAG node
+func DagGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Remove - Remove a DAG node from your local repo
-func Remove(w http.ResponseWriter, r *http.Request) {
+// DagRemove - Remove a DAG node from your local repo
+func DagRemove(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Update - Update an IPLD format node
-func Update(w http.ResponseWriter, r *http.Request) {
+// DagUpdate - Update an IPLD format node
+func DagUpdate(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

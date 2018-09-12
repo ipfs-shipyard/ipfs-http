@@ -29,7 +29,7 @@ ConfigApiService Returns the current config
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return string
 */
-func (a *ConfigApiService) Get(ctx context.Context) (string, *http.Response, error) {
+func (a *ConfigApiService) ConfigGet(ctx context.Context) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -112,16 +112,16 @@ func (a *ConfigApiService) Get(ctx context.Context) (string, *http.Response, err
 ConfigApiService Replaces part of the current config
 The daemon will have to be restarted manually for the changes to take effect
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *PatchOpts - Optional Parameters:
+ * @param optional nil or *ConfigPatchOpts - Optional Parameters:
  * @param "UpdateConfigBody" (optional.Interface of UpdateConfigBody) - 
 @return string
 */
 
-type PatchOpts struct {
+type ConfigPatchOpts struct {
     UpdateConfigBody optional.Interface
 }
 
-func (a *ConfigApiService) Patch(ctx context.Context, localVarOptionals *PatchOpts) (string, *http.Response, error) {
+func (a *ConfigApiService) ConfigPatch(ctx context.Context, localVarOptionals *ConfigPatchOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody     interface{}
@@ -213,16 +213,16 @@ func (a *ConfigApiService) Patch(ctx context.Context, localVarOptionals *PatchOp
 ConfigApiService Replaces the current config
 The daemon will have to be restarted manually for the changes to take effect
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ReplaceOpts - Optional Parameters:
+ * @param optional nil or *ConfigReplaceOpts - Optional Parameters:
  * @param "UpdateConfigBody" (optional.Interface of UpdateConfigBody) - 
 @return string
 */
 
-type ReplaceOpts struct {
+type ConfigReplaceOpts struct {
     UpdateConfigBody optional.Interface
 }
 
-func (a *ConfigApiService) Replace(ctx context.Context, localVarOptionals *ReplaceOpts) (string, *http.Response, error) {
+func (a *ConfigApiService) ConfigReplace(ctx context.Context, localVarOptionals *ConfigReplaceOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody     interface{}
@@ -316,7 +316,7 @@ The daemon will have to be restarted manually for the changes to take effect
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return string
 */
-func (a *ConfigApiService) Reset(ctx context.Context) (string, *http.Response, error) {
+func (a *ConfigApiService) ConfigReset(ctx context.Context) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody     interface{}

@@ -32,7 +32,7 @@ DhtApiService Retrieve the Peer Info of a reachable node in the network
  * @param peerId The Peer ID that we wish to find info about
 @return string
 */
-func (a *DhtApiService) FindPeer(ctx context.Context, peerId string) (string, *http.Response, error) {
+func (a *DhtApiService) DhtFindPeer(ctx context.Context, peerId string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -116,15 +116,15 @@ func (a *DhtApiService) FindPeer(ctx context.Context, peerId string) (string, *h
 DhtApiService Retrieve the providers for content that is addressed by an hash
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cid The content id that we wish to find providers for
- * @param optional nil or *FindProvidersOpts - Optional Parameters:
+ * @param optional nil or *DhtFindProvidersOpts - Optional Parameters:
  * @param "Timeout" (optional.Int32) - 
 */
 
-type FindProvidersOpts struct {
+type DhtFindProvidersOpts struct {
     Timeout optional.Int32
 }
 
-func (a *DhtApiService) FindProviders(ctx context.Context, cid string, localVarOptionals *FindProvidersOpts) (*http.Response, error) {
+func (a *DhtApiService) DhtFindProviders(ctx context.Context, cid string, localVarOptionals *DhtFindProvidersOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -194,7 +194,7 @@ DhtApiService Retrieve a value from the DHT
  * @param key The key to retrieve the associated value for
 @return string
 */
-func (a *DhtApiService) Get(ctx context.Context, key string) (string, *http.Response, error) {
+func (a *DhtApiService) DhtGet(ctx context.Context, key string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -277,18 +277,18 @@ func (a *DhtApiService) Get(ctx context.Context, key string) (string, *http.Resp
 /*
 DhtApiService Announce to the network that you are providing given values
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ProvideOpts - Optional Parameters:
+ * @param optional nil or *DhtProvideOpts - Optional Parameters:
  * @param "Recursive" (optional.Bool) -  Recursively provide the entire graph
- * @param "Model1" (optional.Interface of Model1) - 
+ * @param "RequestBody" (optional.Interface of []string) - 
 @return string
 */
 
-type ProvideOpts struct {
+type DhtProvideOpts struct {
     Recursive optional.Bool
-    Model1 optional.Interface
+    RequestBody optional.Interface
 }
 
-func (a *DhtApiService) Provide(ctx context.Context, localVarOptionals *ProvideOpts) (string, *http.Response, error) {
+func (a *DhtApiService) DhtProvide(ctx context.Context, localVarOptionals *DhtProvideOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -309,7 +309,7 @@ func (a *DhtApiService) Provide(ctx context.Context, localVarOptionals *ProvideO
 		localVarQueryParams.Add("recursive", parameterToString(localVarOptionals.Recursive.Value(), ""))
 	}
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -326,12 +326,12 @@ func (a *DhtApiService) Provide(ctx context.Context, localVarOptionals *ProvideO
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Model1.IsSet() {
-		localVarOptionalModel1, localVarOptionalModel1ok := localVarOptionals.Model1.Value().(Model1)
-		if !localVarOptionalModel1ok {
-			return localVarReturnValue, nil, reportError("model1 should be Model1")
+	if localVarOptionals != nil && localVarOptionals.RequestBody.IsSet() {
+		localVarOptionalRequestBody, localVarOptionalRequestBodyok := localVarOptionals.RequestBody.Value().([]string)
+		if !localVarOptionalRequestBodyok {
+			return localVarReturnValue, nil, reportError("requestBody should be []string")
 		}
-		localVarPostBody = &localVarOptionalModel1
+		localVarPostBody = &localVarOptionalRequestBody
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -383,16 +383,16 @@ func (a *DhtApiService) Provide(ctx context.Context, localVarOptionals *ProvideO
 DhtApiService Store a value on the DHT
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param key The content id you are storing
- * @param optional nil or *PutOpts - Optional Parameters:
+ * @param optional nil or *DhtPutOpts - Optional Parameters:
  * @param "DhtValue" (optional.Interface of DhtValue) - 
 @return string
 */
 
-type PutOpts struct {
+type DhtPutOpts struct {
     DhtValue optional.Interface
 }
 
-func (a *DhtApiService) Put(ctx context.Context, key string, localVarOptionals *PutOpts) (string, *http.Response, error) {
+func (a *DhtApiService) DhtPut(ctx context.Context, key string, localVarOptionals *DhtPutOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -403,7 +403,7 @@ func (a *DhtApiService) Put(ctx context.Context, key string, localVarOptionals *
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/dht/{cid}"
+	localVarPath := a.client.cfg.BasePath + "/dht/{key}"
 	localVarPath = strings.Replace(localVarPath, "{"+"key"+"}", fmt.Sprintf("%v", key), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -488,7 +488,7 @@ DhtApiService Queries the network for the 'closest peers' to a given key
  * @param peerId An IPFS/libp2p peer ID
 @return string
 */
-func (a *DhtApiService) Query(ctx context.Context, peerId string) (string, *http.Response, error) {
+func (a *DhtApiService) DhtQuery(ctx context.Context, peerId string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}

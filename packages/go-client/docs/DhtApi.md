@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**FindPeer**](DhtApi.md#FindPeer) | **Get** /dht/peer/{peerId} | Retrieve the Peer Info of a reachable node in the network
-[**FindProviders**](DhtApi.md#FindProviders) | **Get** /dht/providers/{cid} | Retrieve the providers for content that is addressed by an hash
-[**Get**](DhtApi.md#Get) | **Get** /dht/{key} | Retrieve a value from the DHT
-[**Provide**](DhtApi.md#Provide) | **Post** /dht/provide | Announce to the network that you are providing given values
-[**Put**](DhtApi.md#Put) | **Post** /dht/{cid} | Store a value on the DHT
-[**Query**](DhtApi.md#Query) | **Get** /dht/query/{peerId} | Queries the network for the &#39;closest peers&#39; to a given key
+[**DhtFindPeer**](DhtApi.md#DhtFindPeer) | **Get** /dht/peer/{peerId} | Retrieve the Peer Info of a reachable node in the network
+[**DhtFindProviders**](DhtApi.md#DhtFindProviders) | **Get** /dht/providers/{cid} | Retrieve the providers for content that is addressed by an hash
+[**DhtGet**](DhtApi.md#DhtGet) | **Get** /dht/{key} | Retrieve a value from the DHT
+[**DhtProvide**](DhtApi.md#DhtProvide) | **Post** /dht/provide | Announce to the network that you are providing given values
+[**DhtPut**](DhtApi.md#DhtPut) | **Post** /dht/{key} | Store a value on the DHT
+[**DhtQuery**](DhtApi.md#DhtQuery) | **Get** /dht/query/{peerId} | Queries the network for the &#39;closest peers&#39; to a given key
 
 
-# **FindPeer**
-> string FindPeer(ctx, peerId)
+# **DhtFindPeer**
+> string DhtFindPeer(ctx, peerId)
 Retrieve the Peer Info of a reachable node in the network
 
 ### Required Parameters
@@ -38,8 +38,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **FindProviders**
-> FindProviders(ctx, cid, optional)
+# **DhtFindProviders**
+> DhtFindProviders(ctx, cid, optional)
 Retrieve the providers for content that is addressed by an hash
 
 ### Required Parameters
@@ -48,10 +48,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **cid** | **string**| The content id that we wish to find providers for | 
- **optional** | ***FindProvidersOpts** | optional parameters | nil if no parameters
+ **optional** | ***DhtFindProvidersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a FindProvidersOpts struct
+Optional parameters are passed through a pointer to a DhtFindProvidersOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -73,8 +73,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Get**
-> string Get(ctx, key)
+# **DhtGet**
+> string DhtGet(ctx, key)
 Retrieve a value from the DHT
 
 ### Required Parameters
@@ -99,8 +99,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Provide**
-> string Provide(ctx, optional)
+# **DhtProvide**
+> string DhtProvide(ctx, optional)
 Announce to the network that you are providing given values
 
 ### Required Parameters
@@ -108,15 +108,15 @@ Announce to the network that you are providing given values
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ProvideOpts** | optional parameters | nil if no parameters
+ **optional** | ***DhtProvideOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a ProvideOpts struct
+Optional parameters are passed through a pointer to a DhtProvideOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **recursive** | **optional.Bool**| Recursively provide the entire graph | [default to false]
- **model1** | [**optional.Interface of Model1**](Model1.md)|  | 
+ **requestBody** | [**optional.Interface of []string**](array.md)|  | 
 
 ### Return type
 
@@ -128,13 +128,13 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json, */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Put**
-> string Put(ctx, key, optional)
+# **DhtPut**
+> string DhtPut(ctx, key, optional)
 Store a value on the DHT
 
 ### Required Parameters
@@ -143,10 +143,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **key** | **string**| The content id you are storing | 
- **optional** | ***PutOpts** | optional parameters | nil if no parameters
+ **optional** | ***DhtPutOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a PutOpts struct
+Optional parameters are passed through a pointer to a DhtPutOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -168,8 +168,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Query**
-> string Query(ctx, peerId)
+# **DhtQuery**
+> string DhtQuery(ctx, peerId)
 Queries the network for the 'closest peers' to a given key
 
 'closest' is defined by the rules of the underlying Peer Routing mechanism

@@ -122,6 +122,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
+        id: 'files.update',
         payloadType: 'form',
         produces: ['application/json'],
         consumes: ['application/octet-stream', 'multipart/form-data'],

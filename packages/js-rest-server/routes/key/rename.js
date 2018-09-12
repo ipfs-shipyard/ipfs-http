@@ -39,7 +39,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'rename'
+        id: 'key.rename'
       }
     }
   }

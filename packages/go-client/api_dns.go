@@ -31,7 +31,7 @@ DnsApiService Resolve DNS links
  * @param path
 @return string
 */
-func (a *DnsApiService) Dns(ctx context.Context, path string) (string, *http.Response, error) {
+func (a *DnsApiService) MiscellaneousDns(ctx context.Context, path string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}

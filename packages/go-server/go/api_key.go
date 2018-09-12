@@ -13,26 +13,26 @@ import (
 	"net/http"
 )
 
-// Generate - Create a new keypair
-func Generate(w http.ResponseWriter, r *http.Request) {
+// KeyGenerate - Create a new keypair
+func KeyGenerate(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// List - List all local keypairs
-func List(w http.ResponseWriter, r *http.Request) {
+// KeyList - List all local keypairs
+func KeyList(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Remove - Remove a keypair
-func Remove(w http.ResponseWriter, r *http.Request) {
+// KeyRemove - Remove a keypair
+func KeyRemove(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Rename - Rename a keypair
-func Rename(w http.ResponseWriter, r *http.Request) {
+// KeyRename - Rename a keypair
+func KeyRename(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

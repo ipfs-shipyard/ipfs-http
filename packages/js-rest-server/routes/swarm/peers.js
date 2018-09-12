@@ -66,7 +66,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'addrs'
+        id: 'swarm.peers'
       }
     }
   }

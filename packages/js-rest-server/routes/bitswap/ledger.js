@@ -67,7 +67,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'ledger',
+        id: 'bitswap.ledger',
         responses: {
           404: {
             description: 'The peer id was not found'

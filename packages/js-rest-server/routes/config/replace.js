@@ -25,7 +25,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'replace'
+        id: 'config.replace'
       }
     }
   }

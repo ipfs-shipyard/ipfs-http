@@ -13,26 +13,26 @@ import (
 	"net/http"
 )
 
-// Get - Returns the current config
-func Get(w http.ResponseWriter, r *http.Request) {
+// ConfigGet - Returns the current config
+func ConfigGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Patch - Replaces part of the current config
-func Patch(w http.ResponseWriter, r *http.Request) {
+// ConfigPatch - Replaces part of the current config
+func ConfigPatch(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Replace - Replaces the current config
-func Replace(w http.ResponseWriter, r *http.Request) {
+// ConfigReplace - Replaces the current config
+func ConfigReplace(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Reset - Resets the current config to default values
-func Reset(w http.ResponseWriter, r *http.Request) {
+// ConfigReset - Resets the current config to default values
+func ConfigReset(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

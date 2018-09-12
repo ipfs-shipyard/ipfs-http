@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Ledger**](BitswapApi.md#Ledger) | **Get** /bitswap/ledger/{peerId} | Show the current ledger for a peer
-[**Reprovide**](BitswapApi.md#Reprovide) | **Post** /bitswap/reprovide | Trigger reprovider
-[**Stats**](BitswapApi.md#Stats) | **Get** /bitswap/stats | Show diagnostic information on the bitswap agent
-[**Unwant**](BitswapApi.md#Unwant) | **Delete** /bitswap/wantlist/{cid} | Remove a given block from your wantlist
-[**Wantlist**](BitswapApi.md#Wantlist) | **Get** /bitswap/wantlist | Show blocks currently on the wantlist
+[**BitswapLedger**](BitswapApi.md#BitswapLedger) | **Get** /bitswap/ledger/{peerId} | Show the current ledger for a peer
+[**BitswapReprovide**](BitswapApi.md#BitswapReprovide) | **Post** /bitswap/reprovide | Trigger reprovider
+[**BitswapStats**](BitswapApi.md#BitswapStats) | **Get** /bitswap/stats | Show diagnostic information on the bitswap agent
+[**BitswapUnwant**](BitswapApi.md#BitswapUnwant) | **Delete** /bitswap/wantlist/{cid} | Remove a given block from your wantlist
+[**BitswapWantlist**](BitswapApi.md#BitswapWantlist) | **Get** /bitswap/wantlist | Show blocks currently on the wantlist
 
 
-# **Ledger**
-> BitswapLedger Ledger(ctx, peerId, optional)
+# **BitswapLedger**
+> BitswapLedger BitswapLedger(ctx, peerId, optional)
 Show the current ledger for a peer
 
 ### Required Parameters
@@ -21,10 +21,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **peerId** | **string**|  | 
- **optional** | ***LedgerOpts** | optional parameters | nil if no parameters
+ **optional** | ***BitswapLedgerOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a LedgerOpts struct
+Optional parameters are passed through a pointer to a BitswapLedgerOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -47,8 +47,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Reprovide**
-> string Reprovide(ctx, )
+# **BitswapReprovide**
+> string BitswapReprovide(ctx, )
 Trigger reprovider
 
 ### Required Parameters
@@ -69,8 +69,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Stats**
-> BitswapStats Stats(ctx, optional)
+# **BitswapStats**
+> BitswapStats BitswapStats(ctx, optional)
 Show diagnostic information on the bitswap agent
 
 ### Required Parameters
@@ -78,10 +78,10 @@ Show diagnostic information on the bitswap agent
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***StatsOpts** | optional parameters | nil if no parameters
+ **optional** | ***BitswapStatsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a StatsOpts struct
+Optional parameters are passed through a pointer to a BitswapStatsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -103,8 +103,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Unwant**
-> Unwant(ctx, cid)
+# **BitswapUnwant**
+> BitswapUnwant(ctx, cid)
 Remove a given block from your wantlist
 
 ### Required Parameters
@@ -129,8 +129,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Wantlist**
-> Peers Wantlist(ctx, optional)
+# **BitswapWantlist**
+> Peers BitswapWantlist(ctx, optional)
 Show blocks currently on the wantlist
 
 ### Required Parameters
@@ -138,10 +138,10 @@ Show blocks currently on the wantlist
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***WantlistOpts** | optional parameters | nil if no parameters
+ **optional** | ***BitswapWantlistOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a WantlistOpts struct
+Optional parameters are passed through a pointer to a BitswapWantlistOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------

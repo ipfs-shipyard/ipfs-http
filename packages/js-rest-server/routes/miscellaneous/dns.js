@@ -55,7 +55,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'dns',
+        id: 'miscellaneous.dns',
         responses: {
           404: {
             description: 'The DNS name could not be resolved'

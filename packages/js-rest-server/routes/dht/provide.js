@@ -22,13 +22,14 @@ module.exports = {
     description: 'Announce to the network that you are providing given values',
     tags: ['api'],
     validate: {
-      payload: Joi.object({
-        cids: Joi
-          .array()
-          .description('The content IDs you are announcing')
-          .items(Joi.cid())
-          .label('cid-list')
-      }).description('no-arrays'),
+      payload: Joi
+        .array()
+        .description('The content IDs you are announcing')
+        .items(Joi
+            .cid()
+            .label('cid')
+        )
+        .label('cid-list'),
       query: {
         recursive: Joi
           .boolean()
@@ -49,7 +50,8 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'provide'
+        id: 'dht.provide',
+        consumes: ['application/json']
       }
     }
   }

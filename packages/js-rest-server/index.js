@@ -48,7 +48,8 @@ module.exports = {
         },
         sortTags: 'name',
         sortEndpoints: 'path',
-        definitionPrefix: 'useLabel'
+        definitionPrefix: 'useLabel',
+        jsonEditor: true
       }
     }])
 

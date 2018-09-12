@@ -29,7 +29,7 @@ RepoApiService Perform a garbage collection sweep on the repo
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return string
 */
-func (a *RepoApiService) List(ctx context.Context) (string, *http.Response, error) {
+func (a *RepoApiService) RepoGc(ctx context.Context) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -113,7 +113,7 @@ RepoApiService Get stats for the currently used repo
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return RepoStats
 */
-func (a *RepoApiService) Stats(ctx context.Context) (RepoStats, *http.Response, error) {
+func (a *RepoApiService) RepoStats(ctx context.Context) (RepoStats, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}

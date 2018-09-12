@@ -30,50 +30,50 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*BitswapApi* | [**Ledger**](docs/BitswapApi.md#ledger) | **Get** /bitswap/ledger/{peerId} | Show the current ledger for a peer
-*BitswapApi* | [**Reprovide**](docs/BitswapApi.md#reprovide) | **Post** /bitswap/reprovide | Trigger reprovider
-*BitswapApi* | [**Stats**](docs/BitswapApi.md#stats) | **Get** /bitswap/stats | Show diagnostic information on the bitswap agent
-*BitswapApi* | [**Unwant**](docs/BitswapApi.md#unwant) | **Delete** /bitswap/wantlist/{cid} | Remove a given block from your wantlist
-*BitswapApi* | [**Wantlist**](docs/BitswapApi.md#wantlist) | **Get** /bitswap/wantlist | Show blocks currently on the wantlist
-*ConfigApi* | [**Get**](docs/ConfigApi.md#get) | **Get** /config | Returns the current config
-*ConfigApi* | [**Patch**](docs/ConfigApi.md#patch) | **Patch** /config | Replaces part of the current config
-*ConfigApi* | [**Replace**](docs/ConfigApi.md#replace) | **Put** /config | Replaces the current config
-*ConfigApi* | [**Reset**](docs/ConfigApi.md#reset) | **Delete** /config | Resets the current config to default values
-*DagApi* | [**Create**](docs/DagApi.md#create) | **Post** /dag | Store an IPLD format node
-*DagApi* | [**Get**](docs/DagApi.md#get) | **Get** /dag/{cid} | Get a DAG node
-*DagApi* | [**Remove**](docs/DagApi.md#remove) | **Delete** /dag/{cid} | Remove a DAG node from your local repo
-*DagApi* | [**Update**](docs/DagApi.md#update) | **Patch** /dag/{cid} | Update an IPLD format node
-*DhtApi* | [**FindPeer**](docs/DhtApi.md#findpeer) | **Get** /dht/peer/{peerId} | Retrieve the Peer Info of a reachable node in the network
-*DhtApi* | [**FindProviders**](docs/DhtApi.md#findproviders) | **Get** /dht/providers/{cid} | Retrieve the providers for content that is addressed by an hash
-*DhtApi* | [**Get**](docs/DhtApi.md#get) | **Get** /dht/{key} | Retrieve a value from the DHT
-*DhtApi* | [**Provide**](docs/DhtApi.md#provide) | **Post** /dht/provide | Announce to the network that you are providing given values
-*DhtApi* | [**Put**](docs/DhtApi.md#put) | **Post** /dht/{cid} | Store a value on the DHT
-*DhtApi* | [**Query**](docs/DhtApi.md#query) | **Get** /dht/query/{peerId} | Queries the network for the &#39;closest peers&#39; to a given key
-*DnsApi* | [**Dns**](docs/DnsApi.md#dns) | **Get** /dns/{path} | Resolve DNS links
-*FilesApi* | [**DeleteFilesPath**](docs/FilesApi.md#deletefilespath) | **Delete** /files/{path} | Remove an MFS path
-*FilesApi* | [**GetFilesPath**](docs/FilesApi.md#getfilespath) | **Get** /files/{path} | Get a file or directory from your MFS
-*FilesApi* | [**PatchFilesPath**](docs/FilesApi.md#patchfilespath) | **Patch** /files/{path} | Update an MFS path
-*FilesApi* | [**PostFilesPath**](docs/FilesApi.md#postfilespath) | **Post** /files/{path} | Create an MFS path
-*FilesApi* | [**PutFilesPath**](docs/FilesApi.md#putfilespath) | **Put** /files/{path} | Update an MFS path
-*KeyApi* | [**Generate**](docs/KeyApi.md#generate) | **Post** /key | Create a new keypair
-*KeyApi* | [**List**](docs/KeyApi.md#list) | **Get** /key | List all local keypairs
-*KeyApi* | [**Remove**](docs/KeyApi.md#remove) | **Delete** /key/{name} | Remove a keypair
-*KeyApi* | [**Rename**](docs/KeyApi.md#rename) | **Patch** /key/{name} | Rename a keypair
-*NameApi* | [**Publish**](docs/NameApi.md#publish) | **Post** /name | Publish an IPNS name with a given value
-*NameApi* | [**Resolve**](docs/NameApi.md#resolve) | **Get** /name/{name} | Resolve an IPNS name
-*PinsApi* | [**Add**](docs/PinsApi.md#add) | **Post** /pins | Remove a hash from the pinset
-*PinsApi* | [**List**](docs/PinsApi.md#list) | **Get** /pins | List all the objects pinned to local storage
-*PinsApi* | [**Remove**](docs/PinsApi.md#remove) | **Delete** /pins/{hash} | Remove a hash from the pinset
-*PubsubApi* | [**List**](docs/PubsubApi.md#list) | **Get** /pubsub/topics | Returns the list of topics the peer is subscribed to
-*PubsubApi* | [**Subscribe**](docs/PubsubApi.md#subscribe) | **Post** /pubsub/topics | Returns the list of topics the peer is subscribed to
-*RepoApi* | [**List**](docs/RepoApi.md#list) | **Post** /repo/gc | Perform a garbage collection sweep on the repo
-*RepoApi* | [**Stats**](docs/RepoApi.md#stats) | **Get** /repo | Get stats for the currently used repo
-*SwarmApi* | [**Addrs**](docs/SwarmApi.md#addrs) | **Get** /swarm/connections | List of known addresses of each peer connected
-*SwarmApi* | [**Addrs_0**](docs/SwarmApi.md#addrs_0) | **Post** /swarm/connections | Open a connection to a given address
-*SwarmApi* | [**Addrs_1**](docs/SwarmApi.md#addrs_1) | **Get** /swarm/peers | List out the peers that we have connections with
-*SwarmApi* | [**Addrs_2**](docs/SwarmApi.md#addrs_2) | **Delete** /swarm/connections/{address} | Close a connection to a given address
-*SwarmApi* | [**Dns**](docs/SwarmApi.md#dns) | **Post** /swarm/peers/{peerId}/ping | Send echo request packets to IPFS hosts
-*SwarmApi* | [**Info**](docs/SwarmApi.md#info) | **Get** /swarm/peer | Returns information about this peer
+*BitswapApi* | [**BitswapLedger**](docs/BitswapApi.md#bitswapledger) | **Get** /bitswap/ledger/{peerId} | Show the current ledger for a peer
+*BitswapApi* | [**BitswapReprovide**](docs/BitswapApi.md#bitswapreprovide) | **Post** /bitswap/reprovide | Trigger reprovider
+*BitswapApi* | [**BitswapStats**](docs/BitswapApi.md#bitswapstats) | **Get** /bitswap/stats | Show diagnostic information on the bitswap agent
+*BitswapApi* | [**BitswapUnwant**](docs/BitswapApi.md#bitswapunwant) | **Delete** /bitswap/wantlist/{cid} | Remove a given block from your wantlist
+*BitswapApi* | [**BitswapWantlist**](docs/BitswapApi.md#bitswapwantlist) | **Get** /bitswap/wantlist | Show blocks currently on the wantlist
+*ConfigApi* | [**ConfigGet**](docs/ConfigApi.md#configget) | **Get** /config | Returns the current config
+*ConfigApi* | [**ConfigPatch**](docs/ConfigApi.md#configpatch) | **Patch** /config | Replaces part of the current config
+*ConfigApi* | [**ConfigReplace**](docs/ConfigApi.md#configreplace) | **Put** /config | Replaces the current config
+*ConfigApi* | [**ConfigReset**](docs/ConfigApi.md#configreset) | **Delete** /config | Resets the current config to default values
+*DagApi* | [**DagCreate**](docs/DagApi.md#dagcreate) | **Post** /dag | Store an IPLD format node
+*DagApi* | [**DagGet**](docs/DagApi.md#dagget) | **Get** /dag/{cid} | Get a DAG node
+*DagApi* | [**DagRemove**](docs/DagApi.md#dagremove) | **Delete** /dag/{cid} | Remove a DAG node from your local repo
+*DagApi* | [**DagUpdate**](docs/DagApi.md#dagupdate) | **Patch** /dag/{cid} | Update an IPLD format node
+*DhtApi* | [**DhtFindPeer**](docs/DhtApi.md#dhtfindpeer) | **Get** /dht/peer/{peerId} | Retrieve the Peer Info of a reachable node in the network
+*DhtApi* | [**DhtFindProviders**](docs/DhtApi.md#dhtfindproviders) | **Get** /dht/providers/{cid} | Retrieve the providers for content that is addressed by an hash
+*DhtApi* | [**DhtGet**](docs/DhtApi.md#dhtget) | **Get** /dht/{key} | Retrieve a value from the DHT
+*DhtApi* | [**DhtProvide**](docs/DhtApi.md#dhtprovide) | **Post** /dht/provide | Announce to the network that you are providing given values
+*DhtApi* | [**DhtPut**](docs/DhtApi.md#dhtput) | **Post** /dht/{key} | Store a value on the DHT
+*DhtApi* | [**DhtQuery**](docs/DhtApi.md#dhtquery) | **Get** /dht/query/{peerId} | Queries the network for the &#39;closest peers&#39; to a given key
+*DnsApi* | [**MiscellaneousDns**](docs/DnsApi.md#miscellaneousdns) | **Get** /dns/{path} | Resolve DNS links
+*FilesApi* | [**FilesCreate**](docs/FilesApi.md#filescreate) | **Post** /files/{path} | Create an MFS path
+*FilesApi* | [**FilesGet**](docs/FilesApi.md#filesget) | **Get** /files/{path} | Get a file or directory from your MFS
+*FilesApi* | [**FilesRemove**](docs/FilesApi.md#filesremove) | **Delete** /files/{path} | Remove an MFS path
+*FilesApi* | [**FilesReplace**](docs/FilesApi.md#filesreplace) | **Put** /files/{path} | Update an MFS path
+*FilesApi* | [**FilesUpdate**](docs/FilesApi.md#filesupdate) | **Patch** /files/{path} | Update an MFS path
+*KeyApi* | [**KeyGenerate**](docs/KeyApi.md#keygenerate) | **Post** /key | Create a new keypair
+*KeyApi* | [**KeyList**](docs/KeyApi.md#keylist) | **Get** /key | List all local keypairs
+*KeyApi* | [**KeyRemove**](docs/KeyApi.md#keyremove) | **Delete** /key/{name} | Remove a keypair
+*KeyApi* | [**KeyRename**](docs/KeyApi.md#keyrename) | **Patch** /key/{name} | Rename a keypair
+*NameApi* | [**NamePublish**](docs/NameApi.md#namepublish) | **Post** /name | Publish an IPNS name with a given value
+*NameApi* | [**NameResolve**](docs/NameApi.md#nameresolve) | **Get** /name/{name} | Resolve an IPNS name
+*PinsApi* | [**PinAdd**](docs/PinsApi.md#pinadd) | **Post** /pins | Remove a hash from the pinset
+*PinsApi* | [**PinList**](docs/PinsApi.md#pinlist) | **Get** /pins | List all the objects pinned to local storage
+*PinsApi* | [**PinRemove**](docs/PinsApi.md#pinremove) | **Delete** /pins/{hash} | Remove a hash from the pinset
+*PubsubApi* | [**PubsubList**](docs/PubsubApi.md#pubsublist) | **Get** /pubsub/topics | Returns the list of topics the peer is subscribed to
+*PubsubApi* | [**PubsubSubscribe**](docs/PubsubApi.md#pubsubsubscribe) | **Post** /pubsub/topics | Returns the list of topics the peer is subscribed to
+*RepoApi* | [**RepoGc**](docs/RepoApi.md#repogc) | **Post** /repo/gc | Perform a garbage collection sweep on the repo
+*RepoApi* | [**RepoStats**](docs/RepoApi.md#repostats) | **Get** /repo | Get stats for the currently used repo
+*SwarmApi* | [**SwarmAddrs**](docs/SwarmApi.md#swarmaddrs) | **Get** /swarm/connections | List of known addresses of each peer connected
+*SwarmApi* | [**SwarmConnect**](docs/SwarmApi.md#swarmconnect) | **Post** /swarm/connections | Open a connection to a given address
+*SwarmApi* | [**SwarmDisconnect**](docs/SwarmApi.md#swarmdisconnect) | **Delete** /swarm/connections/{address} | Close a connection to a given address
+*SwarmApi* | [**SwarmInfo**](docs/SwarmApi.md#swarminfo) | **Get** /swarm/peer | Returns information about this peer
+*SwarmApi* | [**SwarmPeers**](docs/SwarmApi.md#swarmpeers) | **Get** /swarm/peers | List out the peers that we have connections with
+*SwarmApi* | [**SwarmPing**](docs/SwarmApi.md#swarmping) | **Post** /swarm/peers/{peerId}/ping | Send echo request packets to IPFS hosts
 
 
 ## Documentation For Models
@@ -91,7 +91,6 @@ Class | Method | HTTP request | Description
  - [IpnsOptions](docs/IpnsOptions.md)
  - [IpnsRecord](docs/IpnsRecord.md)
  - [Links](docs/Links.md)
- - [Model1](docs/Model1.md)
  - [Peer](docs/Peer.md)
  - [Peers](docs/Peers.md)
  - [Pin](docs/Pin.md)

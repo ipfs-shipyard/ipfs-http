@@ -36,7 +36,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'unwant',
+        id: 'bitswap.unwant',
         responses: {
           204: {
             description: 'The block was removed from your wantlist'

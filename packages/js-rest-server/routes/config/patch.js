@@ -30,7 +30,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'patch'
+        id: 'config.patch'
       }
     }
   }

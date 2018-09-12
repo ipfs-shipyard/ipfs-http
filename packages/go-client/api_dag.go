@@ -30,7 +30,7 @@ type DagApiService service
 DagApiService Store an IPLD format node
 The dag API supports the creation and manipulation of dag-pb object, as well as other IPLD formats (i.e dag-cbor, ethereum-block, git, etc)
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *CreateOpts - Optional Parameters:
+ * @param optional nil or *DagCreateOpts - Optional Parameters:
  * @param "Format" (optional.String) - 
  * @param "HashAlg" (optional.String) - 
  * @param "CidVersion" (optional.Int32) -  Which CID version to use
@@ -38,14 +38,14 @@ The dag API supports the creation and manipulation of dag-pb object, as well as 
 @return string
 */
 
-type CreateOpts struct {
+type DagCreateOpts struct {
     Format optional.String
     HashAlg optional.String
     CidVersion optional.Int32
     DagNode optional.Interface
 }
 
-func (a *DagApiService) Create(ctx context.Context, localVarOptionals *CreateOpts) (string, *http.Response, error) {
+func (a *DagApiService) DagCreate(ctx context.Context, localVarOptionals *DagCreateOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -147,7 +147,7 @@ DagApiService Get a DAG node
 Resolves a DAG node with the passed CID
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cid The CID that corresponds to the DAG node we wish to retrieve
- * @param optional nil or *GetOpts - Optional Parameters:
+ * @param optional nil or *DagGetOpts - Optional Parameters:
  * @param "CidBase" (optional.String) -  Which number base to use when returning a CID
  * @param "CidVersion" (optional.Int32) -  Which CID version to use
  * @param "Path" (optional.String) -  Path to resolve within this DAGNode
@@ -157,7 +157,7 @@ Resolves a DAG node with the passed CID
 @return string
 */
 
-type GetOpts struct {
+type DagGetOpts struct {
     CidBase optional.String
     CidVersion optional.Int32
     Path optional.String
@@ -166,7 +166,7 @@ type GetOpts struct {
     LocalResolve optional.Bool
 }
 
-func (a *DagApiService) Get(ctx context.Context, cid string, localVarOptionals *GetOpts) (string, *http.Response, error) {
+func (a *DagApiService) DagGet(ctx context.Context, cid string, localVarOptionals *DagGetOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -271,7 +271,7 @@ This will not remove a DAG node from IPFS if other nodes have it
  * @param cid The CID that corresponds to the DAG node we wish to remove
 @return string
 */
-func (a *DagApiService) Remove(ctx context.Context, cid string) (string, *http.Response, error) {
+func (a *DagApiService) DagRemove(ctx context.Context, cid string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody     interface{}
@@ -356,7 +356,7 @@ DagApiService Update an IPLD format node
 This will result in a new DAG node being created
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cid The CID that corresponds to the DAG node we wish to create
- * @param optional nil or *UpdateOpts - Optional Parameters:
+ * @param optional nil or *DagUpdateOpts - Optional Parameters:
  * @param "Format" (optional.String) - 
  * @param "HashAlg" (optional.String) - 
  * @param "CidVersion" (optional.Int32) -  Which CID version to use
@@ -364,14 +364,14 @@ This will result in a new DAG node being created
 @return string
 */
 
-type UpdateOpts struct {
+type DagUpdateOpts struct {
     Format optional.String
     HashAlg optional.String
     CidVersion optional.Int32
     DagNode optional.Interface
 }
 
-func (a *DagApiService) Update(ctx context.Context, cid string, localVarOptionals *UpdateOpts) (string, *http.Response, error) {
+func (a *DagApiService) DagUpdate(ctx context.Context, cid string, localVarOptionals *DagUpdateOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Patch")
 		localVarPostBody     interface{}

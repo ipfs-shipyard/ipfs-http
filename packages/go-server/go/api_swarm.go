@@ -13,38 +13,38 @@ import (
 	"net/http"
 )
 
-// Addrs - List of known addresses of each peer connected
-func Addrs(w http.ResponseWriter, r *http.Request) {
+// SwarmAddrs - List of known addresses of each peer connected
+func SwarmAddrs(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Addrs_1 - Open a connection to a given address
-func Addrs_1(w http.ResponseWriter, r *http.Request) {
+// SwarmConnect - Open a connection to a given address
+func SwarmConnect(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Addrs_2 - List out the peers that we have connections with
-func Addrs_2(w http.ResponseWriter, r *http.Request) {
+// SwarmDisconnect - Close a connection to a given address
+func SwarmDisconnect(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Addrs_3 - Close a connection to a given address
-func Addrs_3(w http.ResponseWriter, r *http.Request) {
+// SwarmInfo - Returns information about this peer
+func SwarmInfo(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Dns - Send echo request packets to IPFS hosts
-func Dns(w http.ResponseWriter, r *http.Request) {
+// SwarmPeers - List out the peers that we have connections with
+func SwarmPeers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Info - Returns information about this peer
-func Info(w http.ResponseWriter, r *http.Request) {
+// SwarmPing - Send echo request packets to IPFS hosts
+func SwarmPing(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

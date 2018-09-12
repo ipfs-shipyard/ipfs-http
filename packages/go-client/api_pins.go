@@ -29,17 +29,17 @@ type PinsApiService service
 /*
 PinsApiService Remove a hash from the pinset
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *AddOpts - Optional Parameters:
+ * @param optional nil or *PinAddOpts - Optional Parameters:
  * @param "Recursive" (optional.Bool) - 
  * @param "CreatePinPayload" (optional.Interface of CreatePinPayload) - 
 */
 
-type AddOpts struct {
+type PinAddOpts struct {
     Recursive optional.Bool
     CreatePinPayload optional.Interface
 }
 
-func (a *PinsApiService) Add(ctx context.Context, localVarOptionals *AddOpts) (*http.Response, error) {
+func (a *PinsApiService) PinAdd(ctx context.Context, localVarOptionals *PinAddOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -114,7 +114,7 @@ func (a *PinsApiService) Add(ctx context.Context, localVarOptionals *AddOpts) (*
 /*
 PinsApiService List all the objects pinned to local storage
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListOpts - Optional Parameters:
+ * @param optional nil or *PinListOpts - Optional Parameters:
  * @param "Type_" (optional.String) - 
  * @param "Cid" (optional.String) - 
  * @param "CidBase" (optional.String) -  Which number base to use when returning a CID
@@ -122,14 +122,14 @@ PinsApiService List all the objects pinned to local storage
 @return Pins
 */
 
-type ListOpts struct {
+type PinListOpts struct {
     Type_ optional.String
     Cid optional.String
     CidBase optional.String
     CidVersion optional.Int32
 }
 
-func (a *PinsApiService) List(ctx context.Context, localVarOptionals *ListOpts) (Pins, *http.Response, error) {
+func (a *PinsApiService) PinList(ctx context.Context, localVarOptionals *PinListOpts) (Pins, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -224,15 +224,15 @@ func (a *PinsApiService) List(ctx context.Context, localVarOptionals *ListOpts) 
 PinsApiService Remove a hash from the pinset
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param hash
- * @param optional nil or *RemoveOpts - Optional Parameters:
+ * @param optional nil or *PinRemoveOpts - Optional Parameters:
  * @param "Recursive" (optional.Bool) - 
 */
 
-type RemoveOpts struct {
+type PinRemoveOpts struct {
     Recursive optional.Bool
 }
 
-func (a *PinsApiService) Remove(ctx context.Context, hash string, localVarOptionals *RemoveOpts) (*http.Response, error) {
+func (a *PinsApiService) PinRemove(ctx context.Context, hash string, localVarOptionals *PinRemoveOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody     interface{}

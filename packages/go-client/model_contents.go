@@ -9,6 +9,5 @@
 
 package openapi
 
-// a descripiton
 type Contents struct {
 }

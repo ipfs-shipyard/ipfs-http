@@ -58,7 +58,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'wantlist'
+        id: 'bitswap.wantlist'
       }
     }
   }

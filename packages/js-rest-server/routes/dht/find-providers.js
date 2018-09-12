@@ -46,7 +46,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'findProviders',
+        id: 'dht.findProviders',
         responses: {
           404: {
             description: 'No provider could be found for the passed CID'

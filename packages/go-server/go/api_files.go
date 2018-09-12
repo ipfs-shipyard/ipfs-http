@@ -13,32 +13,32 @@ import (
 	"net/http"
 )
 
-// DeleteFilesPath - Remove an MFS path
-func DeleteFilesPath(w http.ResponseWriter, r *http.Request) {
+// FilesCreate - Create an MFS path
+func FilesCreate(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// GetFilesPath - Get a file or directory from your MFS
-func GetFilesPath(w http.ResponseWriter, r *http.Request) {
+// FilesGet - Get a file or directory from your MFS
+func FilesGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// PatchFilesPath - Update an MFS path
-func PatchFilesPath(w http.ResponseWriter, r *http.Request) {
+// FilesRemove - Remove an MFS path
+func FilesRemove(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// PostFilesPath - Create an MFS path
-func PostFilesPath(w http.ResponseWriter, r *http.Request) {
+// FilesReplace - Update an MFS path
+func FilesReplace(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// PutFilesPath - Update an MFS path
-func PutFilesPath(w http.ResponseWriter, r *http.Request) {
+// FilesUpdate - Update an MFS path
+func FilesUpdate(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

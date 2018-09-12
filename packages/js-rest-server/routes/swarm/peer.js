@@ -69,7 +69,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'info'
+        id: 'swarm.info'
       }
     }
   }

@@ -54,7 +54,7 @@ module.exports = {
     },*/
     plugins: {
       'hapi-swagger': {
-        id: 'list'
+        id: 'repo.gc'
       }
     }
   }

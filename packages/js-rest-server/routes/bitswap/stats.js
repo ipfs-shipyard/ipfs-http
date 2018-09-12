@@ -104,7 +104,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'stats'
+        id: 'bitswap.stats'
       }
     }
   }

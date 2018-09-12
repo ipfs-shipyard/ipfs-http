@@ -50,7 +50,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'create'
+        id: 'dag.create'
       }
     }
   }

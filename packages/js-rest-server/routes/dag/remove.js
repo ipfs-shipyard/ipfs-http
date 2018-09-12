@@ -22,7 +22,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'remove'
+        id: 'dag.remove'
       }
     }
   }

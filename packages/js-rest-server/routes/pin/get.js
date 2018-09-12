@@ -51,7 +51,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'get',
+        id: 'pin.get',
         responses: {
           404: {
             description: 'The pin could not be found'

@@ -38,7 +38,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'findPeer'
+        id: 'dht.findPeer'
       }
     }
   }

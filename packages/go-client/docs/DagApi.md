@@ -4,14 +4,14 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Create**](DagApi.md#Create) | **Post** /dag | Store an IPLD format node
-[**Get**](DagApi.md#Get) | **Get** /dag/{cid} | Get a DAG node
-[**Remove**](DagApi.md#Remove) | **Delete** /dag/{cid} | Remove a DAG node from your local repo
-[**Update**](DagApi.md#Update) | **Patch** /dag/{cid} | Update an IPLD format node
+[**DagCreate**](DagApi.md#DagCreate) | **Post** /dag | Store an IPLD format node
+[**DagGet**](DagApi.md#DagGet) | **Get** /dag/{cid} | Get a DAG node
+[**DagRemove**](DagApi.md#DagRemove) | **Delete** /dag/{cid} | Remove a DAG node from your local repo
+[**DagUpdate**](DagApi.md#DagUpdate) | **Patch** /dag/{cid} | Update an IPLD format node
 
 
-# **Create**
-> string Create(ctx, optional)
+# **DagCreate**
+> string DagCreate(ctx, optional)
 Store an IPLD format node
 
 The dag API supports the creation and manipulation of dag-pb object, as well as other IPLD formats (i.e dag-cbor, ethereum-block, git, etc)
@@ -21,10 +21,10 @@ The dag API supports the creation and manipulation of dag-pb object, as well as 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***CreateOpts** | optional parameters | nil if no parameters
+ **optional** | ***DagCreateOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a CreateOpts struct
+Optional parameters are passed through a pointer to a DagCreateOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -48,8 +48,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Get**
-> string Get(ctx, cid, optional)
+# **DagGet**
+> string DagGet(ctx, cid, optional)
 Get a DAG node
 
 Resolves a DAG node with the passed CID
@@ -60,10 +60,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **cid** | **string**| The CID that corresponds to the DAG node we wish to retrieve | 
- **optional** | ***GetOpts** | optional parameters | nil if no parameters
+ **optional** | ***DagGetOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a GetOpts struct
+Optional parameters are passed through a pointer to a DagGetOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -90,8 +90,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Remove**
-> string Remove(ctx, cid)
+# **DagRemove**
+> string DagRemove(ctx, cid)
 Remove a DAG node from your local repo
 
 This will not remove a DAG node from IPFS if other nodes have it
@@ -118,8 +118,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Update**
-> string Update(ctx, cid, optional)
+# **DagUpdate**
+> string DagUpdate(ctx, cid, optional)
 Update an IPLD format node
 
 This will result in a new DAG node being created
@@ -130,10 +130,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **cid** | **string**| The CID that corresponds to the DAG node we wish to create | 
- **optional** | ***UpdateOpts** | optional parameters | nil if no parameters
+ **optional** | ***DagUpdateOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a UpdateOpts struct
+Optional parameters are passed through a pointer to a DagUpdateOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------

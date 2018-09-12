@@ -33,7 +33,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'list'
+        id: 'key.list'
       }
     }
   }

@@ -69,7 +69,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'dns',
+        id: 'swarm.ping',
         responses: {
           404: {
             description: 'The DNS name could not be resolved'

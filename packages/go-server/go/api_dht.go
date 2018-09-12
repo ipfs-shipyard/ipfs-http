@@ -13,38 +13,38 @@ import (
 	"net/http"
 )
 
-// FindPeer - Retrieve the Peer Info of a reachable node in the network
-func FindPeer(w http.ResponseWriter, r *http.Request) {
+// DhtFindPeer - Retrieve the Peer Info of a reachable node in the network
+func DhtFindPeer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// FindProviders - Retrieve the providers for content that is addressed by an hash
-func FindProviders(w http.ResponseWriter, r *http.Request) {
+// DhtFindProviders - Retrieve the providers for content that is addressed by an hash
+func DhtFindProviders(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Get - Retrieve a value from the DHT
-func Get(w http.ResponseWriter, r *http.Request) {
+// DhtGet - Retrieve a value from the DHT
+func DhtGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Provide - Announce to the network that you are providing given values
-func Provide(w http.ResponseWriter, r *http.Request) {
+// DhtProvide - Announce to the network that you are providing given values
+func DhtProvide(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Put - Store a value on the DHT
-func Put(w http.ResponseWriter, r *http.Request) {
+// DhtPut - Store a value on the DHT
+func DhtPut(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Query - Queries the network for the 'closest peers' to a given key
-func Query(w http.ResponseWriter, r *http.Request) {
+// DhtQuery - Queries the network for the 'closest peers' to a given key
+func DhtQuery(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

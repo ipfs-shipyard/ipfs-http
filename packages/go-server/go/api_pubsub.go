@@ -13,14 +13,14 @@ import (
 	"net/http"
 )
 
-// List - Returns the list of topics the peer is subscribed to
-func List(w http.ResponseWriter, r *http.Request) {
+// PubsubList - Returns the list of topics the peer is subscribed to
+func PubsubList(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Subscribe - Returns the list of topics the peer is subscribed to
-func Subscribe(w http.ResponseWriter, r *http.Request) {
+// PubsubSubscribe - Returns the list of topics the peer is subscribed to
+func PubsubSubscribe(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

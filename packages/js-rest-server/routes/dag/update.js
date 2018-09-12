@@ -55,7 +55,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'update'
+        id: 'dag.update'
       }
     }
   }

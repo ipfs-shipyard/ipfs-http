@@ -55,7 +55,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'resolve',
+        id: 'name.resolve',
         responses: {
           404: {
             description: 'The IPNS name could not be resolved'

@@ -44,7 +44,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'generate'
+        id: 'key.generate'
       }
     }
   }

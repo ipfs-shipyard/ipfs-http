@@ -29,16 +29,16 @@ type NameApiService service
 /*
 NameApiService Publish an IPNS name with a given value
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *PublishOpts - Optional Parameters:
+ * @param optional nil or *NamePublishOpts - Optional Parameters:
  * @param "IpnsOptions" (optional.Interface of IpnsOptions) - 
 @return IpnsRecord
 */
 
-type PublishOpts struct {
+type NamePublishOpts struct {
     IpnsOptions optional.Interface
 }
 
-func (a *NameApiService) Publish(ctx context.Context, localVarOptionals *PublishOpts) (IpnsRecord, *http.Response, error) {
+func (a *NameApiService) NamePublish(ctx context.Context, localVarOptionals *NamePublishOpts) (IpnsRecord, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -130,18 +130,18 @@ func (a *NameApiService) Publish(ctx context.Context, localVarOptionals *Publish
 NameApiService Resolve an IPNS name
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param name
- * @param optional nil or *ResolveOpts - Optional Parameters:
+ * @param optional nil or *NameResolveOpts - Optional Parameters:
  * @param "Recursive" (optional.Bool) - 
  * @param "Nocache" (optional.Bool) - 
 @return string
 */
 
-type ResolveOpts struct {
+type NameResolveOpts struct {
     Recursive optional.Bool
     Nocache optional.Bool
 }
 
-func (a *NameApiService) Resolve(ctx context.Context, name string, localVarOptionals *ResolveOpts) (string, *http.Response, error) {
+func (a *NameApiService) NameResolve(ctx context.Context, name string, localVarOptionals *NameResolveOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody     interface{}

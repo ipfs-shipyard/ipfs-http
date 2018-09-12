@@ -13,20 +13,20 @@ import (
 	"net/http"
 )
 
-// Add - Remove a hash from the pinset
-func Add(w http.ResponseWriter, r *http.Request) {
+// PinAdd - Remove a hash from the pinset
+func PinAdd(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// List - List all the objects pinned to local storage
-func List(w http.ResponseWriter, r *http.Request) {
+// PinList - List all the objects pinned to local storage
+func PinList(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-// Remove - Remove a hash from the pinset
-func Remove(w http.ResponseWriter, r *http.Request) {
+// PinRemove - Remove a hash from the pinset
+func PinRemove(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

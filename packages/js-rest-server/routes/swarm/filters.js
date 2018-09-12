@@ -62,7 +62,7 @@ module.exports = {
     },*/
     plugins: {
       'hapi-swagger': {
-        id: 'filters'
+        id: 'swarm.filters'
       }
     }
   }

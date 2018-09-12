@@ -33,7 +33,7 @@ module.exports = {
     },
     plugins: {
       'hapi-swagger': {
-        id: 'reprovide'
+        id: 'bitswap.reprovide'
       }
     }
   }

@@ -9,7 +9,7 @@ paths:
   /config:
     delete:
       description: The daemon will have to be restarted manually for the changes to take effect
-      operationId: reset
+      operationId: config.reset
       responses:
         default:
           content:
@@ -21,7 +21,7 @@ paths:
       tags:
       - config
     get:
-      operationId: get
+      operationId: config.get
       responses:
         default:
           content:
@@ -34,7 +34,7 @@ paths:
       - config
     patch:
       description: The daemon will have to be restarted manually for the changes to take effect
-      operationId: patch
+      operationId: config.patch
       requestBody:
         content:
           '*/*':
@@ -53,7 +53,7 @@ paths:
       - config
     put:
       description: The daemon will have to be restarted manually for the changes to take effect
-      operationId: replace
+      operationId: config.replace
       requestBody:
         content:
           '*/*':
@@ -72,7 +72,7 @@ paths:
       - config
   /key:
     get:
-      operationId: list
+      operationId: key.list
       responses:
         default:
           content:
@@ -87,7 +87,7 @@ paths:
       tags:
       - key
     post:
-      operationId: generate
+      operationId: key.generate
       requestBody:
         content:
           '*/*':
@@ -109,7 +109,7 @@ paths:
       - key
   /pins:
     get:
-      operationId: list
+      operationId: pin.list
       parameters:
       - in: query
         name: type
@@ -196,7 +196,7 @@ paths:
       tags:
       - pins
     post:
-      operationId: add
+      operationId: pin.add
       parameters:
       - in: query
         name: recursive
@@ -218,7 +218,7 @@ paths:
       - pins
   /repo:
     get:
-      operationId: stats
+      operationId: repo.stats
       responses:
         200:
           content:
@@ -234,7 +234,7 @@ paths:
       - repo
   /bitswap/stats:
     get:
-      operationId: stats
+      operationId: bitswap.stats
       parameters:
       - description: Which number base to use when returning a CID
         in: query
@@ -306,7 +306,7 @@ paths:
       - bitswap
   /bitswap/wantlist:
     get:
-      operationId: wantlist
+      operationId: bitswap.wantlist
       parameters:
       - description: Which number base to use when returning a CID
         in: query
@@ -384,7 +384,7 @@ paths:
   /dag/{cid}:
     delete:
       description: This will not remove a DAG node from IPFS if other nodes have it
-      operationId: remove
+      operationId: dag.remove
       parameters:
       - description: The CID that corresponds to the DAG node we wish to remove
         in: path
@@ -404,7 +404,7 @@ paths:
       - dag
     get:
       description: Resolves a DAG node with the passed CID
-      operationId: get
+      operationId: dag.get
       parameters:
       - description: The CID that corresponds to the DAG node we wish to retrieve
         in: path
@@ -508,7 +508,7 @@ paths:
       - dag
     patch:
       description: This will result in a new DAG node being created
-      operationId: update
+      operationId: dag.update
       parameters:
       - description: The CID that corresponds to the DAG node we wish to create
         in: path
@@ -930,7 +930,7 @@ paths:
       - dag
   /dht/{key}:
     get:
-      operationId: get
+      operationId: dht.get
       parameters:
       - description: The key to retrieve the associated value for
         in: path
@@ -951,9 +951,37 @@ paths:
       summary: Retrieve a value from the DHT
       tags:
       - dht
+    post:
+      operationId: dht.put
+      parameters:
+      - description: The content id you are storing
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/dht-value'
+        required: false
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Store a value on the DHT
+      tags:
+      - dht
   /dns/{path}:
     get:
-      operationId: dns
+      operationId: miscellaneous.dns
       parameters:
       - in: path
         name: path
@@ -979,7 +1007,7 @@ paths:
   /files/{path}:
     delete:
       description: Removes a directory or file from your MFS
-      operationId: deleteFilesPath
+      operationId: files.remove
       parameters:
       - description: The MFS path you wish to remove
         in: path
@@ -1012,7 +1040,7 @@ paths:
         to download file data.<br/><br/>If the path resolves to a file and `accept:
         application/octet-stream` has been specified, you may pass the `offset` and
         `length` parameters.'
-      operationId: getFilesPath
+      operationId: files.get
       parameters:
       - description: The MFS path you wish to retrieve
         in: path
@@ -1130,7 +1158,7 @@ paths:
       - files
     patch:
       description: Updates a file or directory at the passed MFS path
-      operationId: patchFilesPath
+      operationId: files.update
       parameters:
       - description: The MFS path you wish to update
         in: path
@@ -1563,7 +1591,7 @@ paths:
       - files
     post:
       description: Create a new file or directory at the passed MFS path
-      operationId: postFilesPath
+      operationId: files.create
       parameters:
       - description: The MFS path you wish to create
         in: path
@@ -1990,7 +2018,7 @@ paths:
       - files
     put:
       description: Updates a file or directory at the passed MFS path
-      operationId: putFilesPath
+      operationId: files.replace
       parameters:
       - description: The MFS path you wish to update
         in: path
@@ -2404,7 +2432,7 @@ paths:
       - files
   /name/{name}:
     get:
-      operationId: resolve
+      operationId: name.resolve
       parameters:
       - in: path
         name: name
@@ -2439,7 +2467,7 @@ paths:
       - name
   /pubsub/topics:
     get:
-      operationId: list
+      operationId: pubsub.list
       responses:
         default:
           content:
@@ -2454,7 +2482,7 @@ paths:
       tags:
       - pubsub
     post:
-      operationId: subscribe
+      operationId: pubsub.subscribe
       requestBody:
         content:
           '*/*':
@@ -2476,7 +2504,7 @@ paths:
       - pubsub
   /swarm/connections:
     get:
-      operationId: addrs
+      operationId: swarm.addrs
       responses:
         default:
           content:
@@ -2491,7 +2519,7 @@ paths:
       tags:
       - swarm
     post:
-      operationId: addrs
+      operationId: swarm.connect
       requestBody:
         content:
           '*/*':
@@ -2513,7 +2541,7 @@ paths:
       - swarm
   /swarm/peer:
     get:
-      operationId: info
+      operationId: swarm.info
       responses:
         200:
           content:
@@ -2529,7 +2557,7 @@ paths:
       - swarm
   /swarm/peers:
     get:
-      operationId: addrs
+      operationId: swarm.peers
       responses:
         200:
           content:
@@ -2545,7 +2573,7 @@ paths:
       - swarm
   /bitswap/ledger/{peerId}:
     get:
-      operationId: ledger
+      operationId: bitswap.ledger
       parameters:
       - in: path
         name: peerId
@@ -2625,7 +2653,7 @@ paths:
       - bitswap
   /dht/peer/{peerId}:
     get:
-      operationId: findPeer
+      operationId: dht.findPeer
       parameters:
       - description: The Peer ID that we wish to find info about
         in: path
@@ -2648,7 +2676,7 @@ paths:
       - dht
   /dht/providers/{cid}:
     get:
-      operationId: findProviders
+      operationId: dht.findProviders
       parameters:
       - description: The content id that we wish to find providers for
         in: path
@@ -2672,7 +2700,7 @@ paths:
     get:
       description: '''closest'' is defined by the rules of the underlying Peer Routing
         mechanism'
-      operationId: query
+      operationId: dht.query
       parameters:
       - description: An IPFS/libp2p peer ID
         in: path
@@ -2696,7 +2724,7 @@ paths:
   /dag:
     post:
       description: The dag API supports the creation and manipulation of dag-pb object, as well as other IPLD formats (i.e dag-cbor, ethereum-block, git, etc)
-      operationId: create
+      operationId: dag.create
       parameters:
       - in: query
         name: format
@@ -3112,7 +3140,7 @@ paths:
       - dag
   /name:
     post:
-      operationId: publish
+      operationId: name.publish
       requestBody:
         content:
           '*/*':
@@ -3134,7 +3162,7 @@ paths:
       - name
   /bitswap/reprovide:
     post:
-      operationId: reprovide
+      operationId: bitswap.reprovide
       responses:
         204:
           content:
@@ -3147,7 +3175,7 @@ paths:
       - bitswap
   /dht/provide:
     post:
-      operationId: provide
+      operationId: dht.provide
       parameters:
       - description: Recursively provide the entire graph
         in: query
@@ -3157,9 +3185,9 @@ paths:
           type: boolean
       requestBody:
         content:
-          '*/*':
+          application/json:
             schema:
-              $ref: '#/components/schemas/Model 1'
+              $ref: '#/components/schemas/cid-list'
         required: false
       responses:
         default:
@@ -3174,38 +3202,9 @@ paths:
       summary: Announce to the network that you are providing given values
       tags:
       - dht
-  /dht/{cid}:
-    post:
-      operationId: put
-      parameters:
-      - description: The content id you are storing
-        in: path
-        name: key
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          '*/*':
-            schema:
-              $ref: '#/components/schemas/dht-value'
-        required: false
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                type: string
-            '*/*':
-              schema:
-                type: string
-          description: Successful
-      summary: Store a value on the DHT
-      tags:
-      - dht
   /repo/gc:
     post:
-      operationId: list
+      operationId: repo.gc
       responses:
         default:
           content:
@@ -3222,7 +3221,7 @@ paths:
   /swarm/peers/{peerId}/ping:
     post:
       description: Note that not all ping response objects are "pongs".<br/><br/>A "pong" message can be identified by a truthy success property and an empty text property.<br/><br/>Other ping responses are failures or status updates.
-      operationId: dns
+      operationId: swarm.ping
       parameters:
       - in: path
         name: peerId
@@ -3253,7 +3252,7 @@ paths:
       - swarm
   /key/{name}:
     delete:
-      operationId: remove
+      operationId: key.remove
       parameters:
       - in: path
         name: name
@@ -3274,7 +3273,7 @@ paths:
       tags:
       - key
     patch:
-      operationId: rename
+      operationId: key.rename
       parameters:
       - in: path
         name: name
@@ -3302,7 +3301,7 @@ paths:
       - key
   /pins/{hash}:
     delete:
-      operationId: remove
+      operationId: pin.remove
       parameters:
       - in: path
         name: hash
@@ -3326,7 +3325,7 @@ paths:
       - pins
   /bitswap/wantlist/{cid}:
     delete:
-      operationId: unwant
+      operationId: bitswap.unwant
       parameters:
       - description: The CID to remove from the wantlist
         in: path
@@ -3346,7 +3345,14 @@ paths:
       - bitswap
   /swarm/connections/{address}:
     delete:
-      operationId: addrs
+      operationId: swarm.disconnect
+      parameters:
+      - description: The address of the peer to disconnect from
+        in: path
+        name: address
+        required: true
+        schema:
+          type: string
       responses:
         default:
           content:
@@ -3362,12 +3368,6 @@ paths:
       - swarm
 components:
   schemas:
-    Model 1:
-      description: no-arrays
-      properties:
-        cids:
-          $ref: '#/components/schemas/cid-list'
-      type: object
     bitswap-ledger:
       example:
         debtRatio: 0.80082819046101150206595775671303272247314453125
@@ -3689,7 +3689,6 @@ components:
       - address
       type: object
     contents:
-      description: a descripiton
       items:
         $ref: '#/components/schemas/unixfs-entry-summary'
       type: array

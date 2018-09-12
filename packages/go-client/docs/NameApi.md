@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Publish**](NameApi.md#Publish) | **Post** /name | Publish an IPNS name with a given value
-[**Resolve**](NameApi.md#Resolve) | **Get** /name/{name} | Resolve an IPNS name
+[**NamePublish**](NameApi.md#NamePublish) | **Post** /name | Publish an IPNS name with a given value
+[**NameResolve**](NameApi.md#NameResolve) | **Get** /name/{name} | Resolve an IPNS name
 
 
-# **Publish**
-> IpnsRecord Publish(ctx, optional)
+# **NamePublish**
+> IpnsRecord NamePublish(ctx, optional)
 Publish an IPNS name with a given value
 
 ### Required Parameters
@@ -17,10 +17,10 @@ Publish an IPNS name with a given value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***PublishOpts** | optional parameters | nil if no parameters
+ **optional** | ***NamePublishOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a PublishOpts struct
+Optional parameters are passed through a pointer to a NamePublishOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -41,8 +41,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Resolve**
-> string Resolve(ctx, name, optional)
+# **NameResolve**
+> string NameResolve(ctx, name, optional)
 Resolve an IPNS name
 
 ### Required Parameters
@@ -51,10 +51,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **name** | **string**|  | 
- **optional** | ***ResolveOpts** | optional parameters | nil if no parameters
+ **optional** | ***NameResolveOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a ResolveOpts struct
+Optional parameters are passed through a pointer to a NameResolveOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
