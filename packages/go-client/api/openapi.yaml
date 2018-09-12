@@ -1,0 +1,3723 @@
+openapi: 3.0.1
+info:
+  title: IPFS API Documentation
+  version: 1.0.0
+servers:
+- url: http://localhost/
+tags: []
+paths:
+  /config:
+    delete:
+      description: The daemon will have to be restarted manually for the changes to take effect
+      operationId: reset
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Resets the current config to default values
+      tags:
+      - config
+    get:
+      operationId: get
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Returns the current config
+      tags:
+      - config
+    patch:
+      description: The daemon will have to be restarted manually for the changes to take effect
+      operationId: patch
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/update-config-body'
+        required: false
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Replaces part of the current config
+      tags:
+      - config
+    put:
+      description: The daemon will have to be restarted manually for the changes to take effect
+      operationId: replace
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/update-config-body'
+        required: false
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Replaces the current config
+      tags:
+      - config
+  /key:
+    get:
+      operationId: list
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: List all local keypairs
+      tags:
+      - key
+    post:
+      operationId: generate
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/generate-keypair-payload'
+        required: false
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Create a new keypair
+      tags:
+      - key
+  /pins:
+    get:
+      operationId: list
+      parameters:
+      - in: query
+        name: type
+        schema:
+          default: all
+          enum:
+          - recursive
+          - direct
+          - indirect
+          type: string
+      - in: query
+        name: cid
+        schema:
+          type: string
+      - description: Which number base to use when returning a CID
+        in: query
+        name: cidBase
+        schema:
+          default: base32
+          enum:
+          - base64
+          - base32
+          - base58btc
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 0
+            - 1
+            x-constraint:
+              positive: true
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 1
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 0
+          - 1
+          x-constraint:
+            positive: true
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 1
+          x-constraint:
+            positive: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pins'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/pins'
+          description: Successful
+        404:
+          content: {}
+          description: The DNS name could not be resolved
+      summary: List all the objects pinned to local storage
+      tags:
+      - pins
+    post:
+      operationId: add
+      parameters:
+      - in: query
+        name: recursive
+        schema:
+          default: true
+          type: boolean
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/create-pin-payload'
+        required: false
+      responses:
+        404:
+          content: {}
+          description: The pin could not be found
+      summary: Remove a hash from the pinset
+      tags:
+      - pins
+  /repo:
+    get:
+      operationId: stats
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repo-stats'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/repo-stats'
+          description: Successful
+      summary: Get stats for the currently used repo
+      tags:
+      - repo
+  /bitswap/stats:
+    get:
+      operationId: stats
+      parameters:
+      - description: Which number base to use when returning a CID
+        in: query
+        name: cidBase
+        schema:
+          default: base32
+          enum:
+          - base64
+          - base32
+          - base58btc
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 0
+            - 1
+            x-constraint:
+              positive: true
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 1
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 0
+          - 1
+          x-constraint:
+            positive: true
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 1
+          x-constraint:
+            positive: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bitswap-stats'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/bitswap-stats'
+          description: Successful
+      summary: Show diagnostic information on the bitswap agent
+      tags:
+      - bitswap
+  /bitswap/wantlist:
+    get:
+      operationId: wantlist
+      parameters:
+      - description: Which number base to use when returning a CID
+        in: query
+        name: cidBase
+        schema:
+          default: base32
+          enum:
+          - base64
+          - base32
+          - base58btc
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 0
+            - 1
+            x-constraint:
+              positive: true
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 1
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 0
+          - 1
+          x-constraint:
+            positive: true
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 1
+          x-constraint:
+            positive: true
+      - description: Filter the wantlist by this peer ID
+        in: query
+        name: peerId
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/peers'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/peers'
+          description: Successful
+      summary: Show blocks currently on the wantlist
+      tags:
+      - bitswap
+  /dag/{cid}:
+    delete:
+      description: This will not remove a DAG node from IPFS if other nodes have it
+      operationId: remove
+      parameters:
+      - description: The CID that corresponds to the DAG node we wish to remove
+        in: path
+        name: cid
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Remove a DAG node from your local repo
+      tags:
+      - dag
+    get:
+      description: Resolves a DAG node with the passed CID
+      operationId: get
+      parameters:
+      - description: The CID that corresponds to the DAG node we wish to retrieve
+        in: path
+        name: cid
+        required: true
+        schema:
+          type: string
+      - description: Which number base to use when returning a CID
+        in: query
+        name: cidBase
+        schema:
+          default: base32
+          enum:
+          - base64
+          - base32
+          - base58btc
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 0
+            - 1
+            x-constraint:
+              positive: true
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 1
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 0
+          - 1
+          x-constraint:
+            positive: true
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 1
+          x-constraint:
+            positive: true
+      - description: Path to resolve within this DAGNode
+        in: query
+        name: path
+        schema:
+          type: string
+      - description: Byte offset to start streaming from
+        in: query
+        name: offset
+        schema:
+          minimum: 0
+          type: integer
+      - description: Max number of bytes to stream
+        in: query
+        name: length
+        schema:
+          minimum: 0
+          type: integer
+      - description: If set to true, it will avoid resolving through different objects
+        in: query
+        name: localResolve
+        schema:
+          default: false
+          type: boolean
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            application/octet-stream:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Get a DAG node
+      tags:
+      - dag
+    patch:
+      description: This will result in a new DAG node being created
+      operationId: update
+      parameters:
+      - description: The CID that corresponds to the DAG node we wish to create
+        in: path
+        name: cid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: format
+        schema:
+          default: dag-cbor
+          enum:
+          - dag-cbor
+          - dag-pb
+          type: string
+      - in: query
+        name: hashAlg
+        schema:
+          default: sha2-256
+          enum:
+          - id
+          - sha1
+          - sha2-256
+          - sha2-512
+          - dbl-sha2-256
+          - sha3-224
+          - sha3-256
+          - sha3-384
+          - sha3-512
+          - shake-128
+          - shake-256
+          - keccak-224
+          - keccak-256
+          - keccak-384
+          - keccak-512
+          - murmur3-128
+          - murmur3-32
+          - blake2b-8
+          - blake2b-16
+          - blake2b-24
+          - blake2b-32
+          - blake2b-40
+          - blake2b-48
+          - blake2b-56
+          - blake2b-64
+          - blake2b-72
+          - blake2b-80
+          - blake2b-88
+          - blake2b-96
+          - blake2b-104
+          - blake2b-112
+          - blake2b-120
+          - blake2b-128
+          - blake2b-136
+          - blake2b-144
+          - blake2b-152
+          - blake2b-160
+          - blake2b-168
+          - blake2b-176
+          - blake2b-184
+          - blake2b-192
+          - blake2b-200
+          - blake2b-208
+          - blake2b-216
+          - blake2b-224
+          - blake2b-232
+          - blake2b-240
+          - blake2b-248
+          - blake2b-256
+          - blake2b-264
+          - blake2b-272
+          - blake2b-280
+          - blake2b-288
+          - blake2b-296
+          - blake2b-304
+          - blake2b-312
+          - blake2b-320
+          - blake2b-328
+          - blake2b-336
+          - blake2b-344
+          - blake2b-352
+          - blake2b-360
+          - blake2b-368
+          - blake2b-376
+          - blake2b-384
+          - blake2b-392
+          - blake2b-400
+          - blake2b-408
+          - blake2b-416
+          - blake2b-424
+          - blake2b-432
+          - blake2b-440
+          - blake2b-448
+          - blake2b-456
+          - blake2b-464
+          - blake2b-472
+          - blake2b-480
+          - blake2b-488
+          - blake2b-496
+          - blake2b-504
+          - blake2b-512
+          - blake2s-8
+          - blake2s-16
+          - blake2s-24
+          - blake2s-32
+          - blake2s-40
+          - blake2s-48
+          - blake2s-56
+          - blake2s-64
+          - blake2s-72
+          - blake2s-80
+          - blake2s-88
+          - blake2s-96
+          - blake2s-104
+          - blake2s-112
+          - blake2s-120
+          - blake2s-128
+          - blake2s-136
+          - blake2s-144
+          - blake2s-152
+          - blake2s-160
+          - blake2s-168
+          - blake2s-176
+          - blake2s-184
+          - blake2s-192
+          - blake2s-200
+          - blake2s-208
+          - blake2s-216
+          - blake2s-224
+          - blake2s-232
+          - blake2s-240
+          - blake2s-248
+          - blake2s-256
+          - Skein256-8
+          - Skein256-16
+          - Skein256-24
+          - Skein256-32
+          - Skein256-40
+          - Skein256-48
+          - Skein256-56
+          - Skein256-64
+          - Skein256-72
+          - Skein256-80
+          - Skein256-88
+          - Skein256-96
+          - Skein256-104
+          - Skein256-112
+          - Skein256-120
+          - Skein256-128
+          - Skein256-136
+          - Skein256-144
+          - Skein256-152
+          - Skein256-160
+          - Skein256-168
+          - Skein256-176
+          - Skein256-184
+          - Skein256-192
+          - Skein256-200
+          - Skein256-208
+          - Skein256-216
+          - Skein256-224
+          - Skein256-232
+          - Skein256-240
+          - Skein256-248
+          - Skein256-256
+          - Skein512-8
+          - Skein512-16
+          - Skein512-24
+          - Skein512-32
+          - Skein512-40
+          - Skein512-48
+          - Skein512-56
+          - Skein512-64
+          - Skein512-72
+          - Skein512-80
+          - Skein512-88
+          - Skein512-96
+          - Skein512-104
+          - Skein512-112
+          - Skein512-120
+          - Skein512-128
+          - Skein512-136
+          - Skein512-144
+          - Skein512-152
+          - Skein512-160
+          - Skein512-168
+          - Skein512-176
+          - Skein512-184
+          - Skein512-192
+          - Skein512-200
+          - Skein512-208
+          - Skein512-216
+          - Skein512-224
+          - Skein512-232
+          - Skein512-240
+          - Skein512-248
+          - Skein512-256
+          - Skein512-264
+          - Skein512-272
+          - Skein512-280
+          - Skein512-288
+          - Skein512-296
+          - Skein512-304
+          - Skein512-312
+          - Skein512-320
+          - Skein512-328
+          - Skein512-336
+          - Skein512-344
+          - Skein512-352
+          - Skein512-360
+          - Skein512-368
+          - Skein512-376
+          - Skein512-384
+          - Skein512-392
+          - Skein512-400
+          - Skein512-408
+          - Skein512-416
+          - Skein512-424
+          - Skein512-432
+          - Skein512-440
+          - Skein512-448
+          - Skein512-456
+          - Skein512-464
+          - Skein512-472
+          - Skein512-480
+          - Skein512-488
+          - Skein512-496
+          - Skein512-504
+          - Skein512-512
+          - Skein1024-8
+          - Skein1024-16
+          - Skein1024-24
+          - Skein1024-32
+          - Skein1024-40
+          - Skein1024-48
+          - Skein1024-56
+          - Skein1024-64
+          - Skein1024-72
+          - Skein1024-80
+          - Skein1024-88
+          - Skein1024-96
+          - Skein1024-104
+          - Skein1024-112
+          - Skein1024-120
+          - Skein1024-128
+          - Skein1024-136
+          - Skein1024-144
+          - Skein1024-152
+          - Skein1024-160
+          - Skein1024-168
+          - Skein1024-176
+          - Skein1024-184
+          - Skein1024-192
+          - Skein1024-200
+          - Skein1024-208
+          - Skein1024-216
+          - Skein1024-224
+          - Skein1024-232
+          - Skein1024-240
+          - Skein1024-248
+          - Skein1024-256
+          - Skein1024-264
+          - Skein1024-272
+          - Skein1024-280
+          - Skein1024-288
+          - Skein1024-296
+          - Skein1024-304
+          - Skein1024-312
+          - Skein1024-320
+          - Skein1024-328
+          - Skein1024-336
+          - Skein1024-344
+          - Skein1024-352
+          - Skein1024-360
+          - Skein1024-368
+          - Skein1024-376
+          - Skein1024-384
+          - Skein1024-392
+          - Skein1024-400
+          - Skein1024-408
+          - Skein1024-416
+          - Skein1024-424
+          - Skein1024-432
+          - Skein1024-440
+          - Skein1024-448
+          - Skein1024-456
+          - Skein1024-464
+          - Skein1024-472
+          - Skein1024-480
+          - Skein1024-488
+          - Skein1024-496
+          - Skein1024-504
+          - Skein1024-512
+          - Skein1024-520
+          - Skein1024-528
+          - Skein1024-536
+          - Skein1024-544
+          - Skein1024-552
+          - Skein1024-560
+          - Skein1024-568
+          - Skein1024-576
+          - Skein1024-584
+          - Skein1024-592
+          - Skein1024-600
+          - Skein1024-608
+          - Skein1024-616
+          - Skein1024-624
+          - Skein1024-632
+          - Skein1024-640
+          - Skein1024-648
+          - Skein1024-656
+          - Skein1024-664
+          - Skein1024-672
+          - Skein1024-680
+          - Skein1024-688
+          - Skein1024-696
+          - Skein1024-704
+          - Skein1024-712
+          - Skein1024-720
+          - Skein1024-728
+          - Skein1024-736
+          - Skein1024-744
+          - Skein1024-752
+          - Skein1024-760
+          - Skein1024-768
+          - Skein1024-776
+          - Skein1024-784
+          - Skein1024-792
+          - Skein1024-800
+          - Skein1024-808
+          - Skein1024-816
+          - Skein1024-824
+          - Skein1024-832
+          - Skein1024-840
+          - Skein1024-848
+          - Skein1024-856
+          - Skein1024-864
+          - Skein1024-872
+          - Skein1024-880
+          - Skein1024-888
+          - Skein1024-896
+          - Skein1024-904
+          - Skein1024-912
+          - Skein1024-920
+          - Skein1024-928
+          - Skein1024-936
+          - Skein1024-944
+          - Skein1024-952
+          - Skein1024-960
+          - Skein1024-968
+          - Skein1024-976
+          - Skein1024-984
+          - Skein1024-992
+          - Skein1024-1000
+          - Skein1024-1008
+          - Skein1024-1016
+          - Skein1024-1024
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 0
+            - 1
+            x-constraint:
+              positive: true
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 1
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 0
+          - 1
+          x-constraint:
+            positive: true
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 1
+          x-constraint:
+            positive: true
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DAGNode'
+        required: false
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Update an IPLD format node
+      tags:
+      - dag
+  /dht/{key}:
+    get:
+      operationId: get
+      parameters:
+      - description: The key to retrieve the associated value for
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Retrieve a value from the DHT
+      tags:
+      - dht
+  /dns/{path}:
+    get:
+      operationId: dns
+      parameters:
+      - in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+        404:
+          content: {}
+          description: The DNS name could not be resolved
+      summary: Resolve DNS links
+      tags:
+      - dns
+  /files/{path}:
+    delete:
+      description: Removes a directory or file from your MFS
+      operationId: deleteFilesPath
+      parameters:
+      - description: The MFS path you wish to remove
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      - description: Remove directories recursively
+        in: query
+        name: recursive
+        schema:
+          default: false
+          type: boolean
+      responses:
+        204:
+          content: {}
+          description: The file or directory was deleted
+        404:
+          content: {}
+          description: The file or directory did not exist
+        409:
+          content: {}
+          description: The file or directory could not be deleted
+      summary: Remove an MFS path
+      tags:
+      - files
+    get:
+      description: 'Returns a file or directory from your MFS<br/><br/>Specify `accept:
+        application/json` for file/directory metadata or `accept: application/octet-stream`
+        to download file data.<br/><br/>If the path resolves to a file and `accept:
+        application/octet-stream` has been specified, you may pass the `offset` and
+        `length` parameters.'
+      operationId: getFilesPath
+      parameters:
+      - description: The MFS path you wish to retrieve
+        in: path
+        name: path
+        required: true
+        schema:
+          default: /
+          pattern: /^\//
+          type: string
+      - description: Return file data starting at this offset
+        in: query
+        name: offset
+        schema:
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Return file data starting at this offset
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Return file data starting at this offset
+          x-constraint:
+            positive: true
+      - description: Return only this many bytes of file data
+        in: query
+        name: length
+        schema:
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Return only this many bytes of file data
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Return only this many bytes of file data
+          x-constraint:
+            positive: true
+      - description: Which number base to use when returning a CID
+        in: query
+        name: cidBase
+        schema:
+          default: base32
+          enum:
+          - base64
+          - base32
+          - base58btc
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 0
+            - 1
+            x-constraint:
+              positive: true
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 1
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 0
+          - 1
+          x-constraint:
+            positive: true
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 1
+          x-constraint:
+            positive: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unixfs-entry'
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/unixfs-entry'
+          description: Successful
+      summary: Get a file or directory from your MFS
+      tags:
+      - files
+    patch:
+      description: Updates a file or directory at the passed MFS path
+      operationId: patchFilesPath
+      parameters:
+      - description: The MFS path you wish to update
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      - description: Byte offset to begin writing at
+        in: query
+        name: offset
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: Make parent directories as needed
+        in: query
+        name: parents
+        schema:
+          default: false
+          type: boolean
+      - description: Truncate the file to size zero before writing
+        in: query
+        name: truncate
+        schema:
+          default: true
+          type: boolean
+      - description: Maximum number of bytes to write
+        in: query
+        name: length
+        schema:
+          minimum: 0
+          type: integer
+      - description: Use raw blocks for newly created leaf nodes
+        in: query
+        name: rawLeaves
+        schema:
+          default: false
+          type: boolean
+      - in: query
+        name: hashAlg
+        schema:
+          default: sha2-256
+          enum:
+          - id
+          - sha1
+          - sha2-256
+          - sha2-512
+          - dbl-sha2-256
+          - sha3-224
+          - sha3-256
+          - sha3-384
+          - sha3-512
+          - shake-128
+          - shake-256
+          - keccak-224
+          - keccak-256
+          - keccak-384
+          - keccak-512
+          - murmur3-128
+          - murmur3-32
+          - blake2b-8
+          - blake2b-16
+          - blake2b-24
+          - blake2b-32
+          - blake2b-40
+          - blake2b-48
+          - blake2b-56
+          - blake2b-64
+          - blake2b-72
+          - blake2b-80
+          - blake2b-88
+          - blake2b-96
+          - blake2b-104
+          - blake2b-112
+          - blake2b-120
+          - blake2b-128
+          - blake2b-136
+          - blake2b-144
+          - blake2b-152
+          - blake2b-160
+          - blake2b-168
+          - blake2b-176
+          - blake2b-184
+          - blake2b-192
+          - blake2b-200
+          - blake2b-208
+          - blake2b-216
+          - blake2b-224
+          - blake2b-232
+          - blake2b-240
+          - blake2b-248
+          - blake2b-256
+          - blake2b-264
+          - blake2b-272
+          - blake2b-280
+          - blake2b-288
+          - blake2b-296
+          - blake2b-304
+          - blake2b-312
+          - blake2b-320
+          - blake2b-328
+          - blake2b-336
+          - blake2b-344
+          - blake2b-352
+          - blake2b-360
+          - blake2b-368
+          - blake2b-376
+          - blake2b-384
+          - blake2b-392
+          - blake2b-400
+          - blake2b-408
+          - blake2b-416
+          - blake2b-424
+          - blake2b-432
+          - blake2b-440
+          - blake2b-448
+          - blake2b-456
+          - blake2b-464
+          - blake2b-472
+          - blake2b-480
+          - blake2b-488
+          - blake2b-496
+          - blake2b-504
+          - blake2b-512
+          - blake2s-8
+          - blake2s-16
+          - blake2s-24
+          - blake2s-32
+          - blake2s-40
+          - blake2s-48
+          - blake2s-56
+          - blake2s-64
+          - blake2s-72
+          - blake2s-80
+          - blake2s-88
+          - blake2s-96
+          - blake2s-104
+          - blake2s-112
+          - blake2s-120
+          - blake2s-128
+          - blake2s-136
+          - blake2s-144
+          - blake2s-152
+          - blake2s-160
+          - blake2s-168
+          - blake2s-176
+          - blake2s-184
+          - blake2s-192
+          - blake2s-200
+          - blake2s-208
+          - blake2s-216
+          - blake2s-224
+          - blake2s-232
+          - blake2s-240
+          - blake2s-248
+          - blake2s-256
+          - Skein256-8
+          - Skein256-16
+          - Skein256-24
+          - Skein256-32
+          - Skein256-40
+          - Skein256-48
+          - Skein256-56
+          - Skein256-64
+          - Skein256-72
+          - Skein256-80
+          - Skein256-88
+          - Skein256-96
+          - Skein256-104
+          - Skein256-112
+          - Skein256-120
+          - Skein256-128
+          - Skein256-136
+          - Skein256-144
+          - Skein256-152
+          - Skein256-160
+          - Skein256-168
+          - Skein256-176
+          - Skein256-184
+          - Skein256-192
+          - Skein256-200
+          - Skein256-208
+          - Skein256-216
+          - Skein256-224
+          - Skein256-232
+          - Skein256-240
+          - Skein256-248
+          - Skein256-256
+          - Skein512-8
+          - Skein512-16
+          - Skein512-24
+          - Skein512-32
+          - Skein512-40
+          - Skein512-48
+          - Skein512-56
+          - Skein512-64
+          - Skein512-72
+          - Skein512-80
+          - Skein512-88
+          - Skein512-96
+          - Skein512-104
+          - Skein512-112
+          - Skein512-120
+          - Skein512-128
+          - Skein512-136
+          - Skein512-144
+          - Skein512-152
+          - Skein512-160
+          - Skein512-168
+          - Skein512-176
+          - Skein512-184
+          - Skein512-192
+          - Skein512-200
+          - Skein512-208
+          - Skein512-216
+          - Skein512-224
+          - Skein512-232
+          - Skein512-240
+          - Skein512-248
+          - Skein512-256
+          - Skein512-264
+          - Skein512-272
+          - Skein512-280
+          - Skein512-288
+          - Skein512-296
+          - Skein512-304
+          - Skein512-312
+          - Skein512-320
+          - Skein512-328
+          - Skein512-336
+          - Skein512-344
+          - Skein512-352
+          - Skein512-360
+          - Skein512-368
+          - Skein512-376
+          - Skein512-384
+          - Skein512-392
+          - Skein512-400
+          - Skein512-408
+          - Skein512-416
+          - Skein512-424
+          - Skein512-432
+          - Skein512-440
+          - Skein512-448
+          - Skein512-456
+          - Skein512-464
+          - Skein512-472
+          - Skein512-480
+          - Skein512-488
+          - Skein512-496
+          - Skein512-504
+          - Skein512-512
+          - Skein1024-8
+          - Skein1024-16
+          - Skein1024-24
+          - Skein1024-32
+          - Skein1024-40
+          - Skein1024-48
+          - Skein1024-56
+          - Skein1024-64
+          - Skein1024-72
+          - Skein1024-80
+          - Skein1024-88
+          - Skein1024-96
+          - Skein1024-104
+          - Skein1024-112
+          - Skein1024-120
+          - Skein1024-128
+          - Skein1024-136
+          - Skein1024-144
+          - Skein1024-152
+          - Skein1024-160
+          - Skein1024-168
+          - Skein1024-176
+          - Skein1024-184
+          - Skein1024-192
+          - Skein1024-200
+          - Skein1024-208
+          - Skein1024-216
+          - Skein1024-224
+          - Skein1024-232
+          - Skein1024-240
+          - Skein1024-248
+          - Skein1024-256
+          - Skein1024-264
+          - Skein1024-272
+          - Skein1024-280
+          - Skein1024-288
+          - Skein1024-296
+          - Skein1024-304
+          - Skein1024-312
+          - Skein1024-320
+          - Skein1024-328
+          - Skein1024-336
+          - Skein1024-344
+          - Skein1024-352
+          - Skein1024-360
+          - Skein1024-368
+          - Skein1024-376
+          - Skein1024-384
+          - Skein1024-392
+          - Skein1024-400
+          - Skein1024-408
+          - Skein1024-416
+          - Skein1024-424
+          - Skein1024-432
+          - Skein1024-440
+          - Skein1024-448
+          - Skein1024-456
+          - Skein1024-464
+          - Skein1024-472
+          - Skein1024-480
+          - Skein1024-488
+          - Skein1024-496
+          - Skein1024-504
+          - Skein1024-512
+          - Skein1024-520
+          - Skein1024-528
+          - Skein1024-536
+          - Skein1024-544
+          - Skein1024-552
+          - Skein1024-560
+          - Skein1024-568
+          - Skein1024-576
+          - Skein1024-584
+          - Skein1024-592
+          - Skein1024-600
+          - Skein1024-608
+          - Skein1024-616
+          - Skein1024-624
+          - Skein1024-632
+          - Skein1024-640
+          - Skein1024-648
+          - Skein1024-656
+          - Skein1024-664
+          - Skein1024-672
+          - Skein1024-680
+          - Skein1024-688
+          - Skein1024-696
+          - Skein1024-704
+          - Skein1024-712
+          - Skein1024-720
+          - Skein1024-728
+          - Skein1024-736
+          - Skein1024-744
+          - Skein1024-752
+          - Skein1024-760
+          - Skein1024-768
+          - Skein1024-776
+          - Skein1024-784
+          - Skein1024-792
+          - Skein1024-800
+          - Skein1024-808
+          - Skein1024-816
+          - Skein1024-824
+          - Skein1024-832
+          - Skein1024-840
+          - Skein1024-848
+          - Skein1024-856
+          - Skein1024-864
+          - Skein1024-872
+          - Skein1024-880
+          - Skein1024-888
+          - Skein1024-896
+          - Skein1024-904
+          - Skein1024-912
+          - Skein1024-920
+          - Skein1024-928
+          - Skein1024-936
+          - Skein1024-944
+          - Skein1024-952
+          - Skein1024-960
+          - Skein1024-968
+          - Skein1024-976
+          - Skein1024-984
+          - Skein1024-992
+          - Skein1024-1000
+          - Skein1024-1008
+          - Skein1024-1016
+          - Skein1024-1024
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+        x-constraint:
+          positive: true
+      - description: Flush the changes to disk immediately
+        in: query
+        name: flush
+        schema:
+          default: true
+          type: boolean
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              properties:
+                file:
+                  description: The file you wish to write
+                  format: binary
+                  type: string
+                  x-meta:
+                    swaggerType: file
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: The file you wish to write
+                  format: binary
+                  type: string
+                  x-meta:
+                    swaggerType: file
+      responses:
+        204:
+          content: {}
+          description: The file or directory was created
+        409:
+          content: {}
+          description: The file or directory already exists
+      summary: Update an MFS path
+      tags:
+      - files
+    post:
+      description: Create a new file or directory at the passed MFS path
+      operationId: postFilesPath
+      parameters:
+      - description: The MFS path you wish to create
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      - description: Byte offset to begin writing at
+        in: query
+        name: offset
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: Make parent directories as needed
+        in: query
+        name: parents
+        schema:
+          default: false
+          type: boolean
+      - description: Maximum number of bytes to write
+        in: query
+        name: length
+        schema:
+          minimum: 0
+          type: integer
+      - description: Use raw blocks for newly created leaf nodes
+        in: query
+        name: rawLeaves
+        schema:
+          default: false
+          type: boolean
+      - in: query
+        name: hashAlg
+        schema:
+          default: sha2-256
+          enum:
+          - id
+          - sha1
+          - sha2-256
+          - sha2-512
+          - dbl-sha2-256
+          - sha3-224
+          - sha3-256
+          - sha3-384
+          - sha3-512
+          - shake-128
+          - shake-256
+          - keccak-224
+          - keccak-256
+          - keccak-384
+          - keccak-512
+          - murmur3-128
+          - murmur3-32
+          - blake2b-8
+          - blake2b-16
+          - blake2b-24
+          - blake2b-32
+          - blake2b-40
+          - blake2b-48
+          - blake2b-56
+          - blake2b-64
+          - blake2b-72
+          - blake2b-80
+          - blake2b-88
+          - blake2b-96
+          - blake2b-104
+          - blake2b-112
+          - blake2b-120
+          - blake2b-128
+          - blake2b-136
+          - blake2b-144
+          - blake2b-152
+          - blake2b-160
+          - blake2b-168
+          - blake2b-176
+          - blake2b-184
+          - blake2b-192
+          - blake2b-200
+          - blake2b-208
+          - blake2b-216
+          - blake2b-224
+          - blake2b-232
+          - blake2b-240
+          - blake2b-248
+          - blake2b-256
+          - blake2b-264
+          - blake2b-272
+          - blake2b-280
+          - blake2b-288
+          - blake2b-296
+          - blake2b-304
+          - blake2b-312
+          - blake2b-320
+          - blake2b-328
+          - blake2b-336
+          - blake2b-344
+          - blake2b-352
+          - blake2b-360
+          - blake2b-368
+          - blake2b-376
+          - blake2b-384
+          - blake2b-392
+          - blake2b-400
+          - blake2b-408
+          - blake2b-416
+          - blake2b-424
+          - blake2b-432
+          - blake2b-440
+          - blake2b-448
+          - blake2b-456
+          - blake2b-464
+          - blake2b-472
+          - blake2b-480
+          - blake2b-488
+          - blake2b-496
+          - blake2b-504
+          - blake2b-512
+          - blake2s-8
+          - blake2s-16
+          - blake2s-24
+          - blake2s-32
+          - blake2s-40
+          - blake2s-48
+          - blake2s-56
+          - blake2s-64
+          - blake2s-72
+          - blake2s-80
+          - blake2s-88
+          - blake2s-96
+          - blake2s-104
+          - blake2s-112
+          - blake2s-120
+          - blake2s-128
+          - blake2s-136
+          - blake2s-144
+          - blake2s-152
+          - blake2s-160
+          - blake2s-168
+          - blake2s-176
+          - blake2s-184
+          - blake2s-192
+          - blake2s-200
+          - blake2s-208
+          - blake2s-216
+          - blake2s-224
+          - blake2s-232
+          - blake2s-240
+          - blake2s-248
+          - blake2s-256
+          - Skein256-8
+          - Skein256-16
+          - Skein256-24
+          - Skein256-32
+          - Skein256-40
+          - Skein256-48
+          - Skein256-56
+          - Skein256-64
+          - Skein256-72
+          - Skein256-80
+          - Skein256-88
+          - Skein256-96
+          - Skein256-104
+          - Skein256-112
+          - Skein256-120
+          - Skein256-128
+          - Skein256-136
+          - Skein256-144
+          - Skein256-152
+          - Skein256-160
+          - Skein256-168
+          - Skein256-176
+          - Skein256-184
+          - Skein256-192
+          - Skein256-200
+          - Skein256-208
+          - Skein256-216
+          - Skein256-224
+          - Skein256-232
+          - Skein256-240
+          - Skein256-248
+          - Skein256-256
+          - Skein512-8
+          - Skein512-16
+          - Skein512-24
+          - Skein512-32
+          - Skein512-40
+          - Skein512-48
+          - Skein512-56
+          - Skein512-64
+          - Skein512-72
+          - Skein512-80
+          - Skein512-88
+          - Skein512-96
+          - Skein512-104
+          - Skein512-112
+          - Skein512-120
+          - Skein512-128
+          - Skein512-136
+          - Skein512-144
+          - Skein512-152
+          - Skein512-160
+          - Skein512-168
+          - Skein512-176
+          - Skein512-184
+          - Skein512-192
+          - Skein512-200
+          - Skein512-208
+          - Skein512-216
+          - Skein512-224
+          - Skein512-232
+          - Skein512-240
+          - Skein512-248
+          - Skein512-256
+          - Skein512-264
+          - Skein512-272
+          - Skein512-280
+          - Skein512-288
+          - Skein512-296
+          - Skein512-304
+          - Skein512-312
+          - Skein512-320
+          - Skein512-328
+          - Skein512-336
+          - Skein512-344
+          - Skein512-352
+          - Skein512-360
+          - Skein512-368
+          - Skein512-376
+          - Skein512-384
+          - Skein512-392
+          - Skein512-400
+          - Skein512-408
+          - Skein512-416
+          - Skein512-424
+          - Skein512-432
+          - Skein512-440
+          - Skein512-448
+          - Skein512-456
+          - Skein512-464
+          - Skein512-472
+          - Skein512-480
+          - Skein512-488
+          - Skein512-496
+          - Skein512-504
+          - Skein512-512
+          - Skein1024-8
+          - Skein1024-16
+          - Skein1024-24
+          - Skein1024-32
+          - Skein1024-40
+          - Skein1024-48
+          - Skein1024-56
+          - Skein1024-64
+          - Skein1024-72
+          - Skein1024-80
+          - Skein1024-88
+          - Skein1024-96
+          - Skein1024-104
+          - Skein1024-112
+          - Skein1024-120
+          - Skein1024-128
+          - Skein1024-136
+          - Skein1024-144
+          - Skein1024-152
+          - Skein1024-160
+          - Skein1024-168
+          - Skein1024-176
+          - Skein1024-184
+          - Skein1024-192
+          - Skein1024-200
+          - Skein1024-208
+          - Skein1024-216
+          - Skein1024-224
+          - Skein1024-232
+          - Skein1024-240
+          - Skein1024-248
+          - Skein1024-256
+          - Skein1024-264
+          - Skein1024-272
+          - Skein1024-280
+          - Skein1024-288
+          - Skein1024-296
+          - Skein1024-304
+          - Skein1024-312
+          - Skein1024-320
+          - Skein1024-328
+          - Skein1024-336
+          - Skein1024-344
+          - Skein1024-352
+          - Skein1024-360
+          - Skein1024-368
+          - Skein1024-376
+          - Skein1024-384
+          - Skein1024-392
+          - Skein1024-400
+          - Skein1024-408
+          - Skein1024-416
+          - Skein1024-424
+          - Skein1024-432
+          - Skein1024-440
+          - Skein1024-448
+          - Skein1024-456
+          - Skein1024-464
+          - Skein1024-472
+          - Skein1024-480
+          - Skein1024-488
+          - Skein1024-496
+          - Skein1024-504
+          - Skein1024-512
+          - Skein1024-520
+          - Skein1024-528
+          - Skein1024-536
+          - Skein1024-544
+          - Skein1024-552
+          - Skein1024-560
+          - Skein1024-568
+          - Skein1024-576
+          - Skein1024-584
+          - Skein1024-592
+          - Skein1024-600
+          - Skein1024-608
+          - Skein1024-616
+          - Skein1024-624
+          - Skein1024-632
+          - Skein1024-640
+          - Skein1024-648
+          - Skein1024-656
+          - Skein1024-664
+          - Skein1024-672
+          - Skein1024-680
+          - Skein1024-688
+          - Skein1024-696
+          - Skein1024-704
+          - Skein1024-712
+          - Skein1024-720
+          - Skein1024-728
+          - Skein1024-736
+          - Skein1024-744
+          - Skein1024-752
+          - Skein1024-760
+          - Skein1024-768
+          - Skein1024-776
+          - Skein1024-784
+          - Skein1024-792
+          - Skein1024-800
+          - Skein1024-808
+          - Skein1024-816
+          - Skein1024-824
+          - Skein1024-832
+          - Skein1024-840
+          - Skein1024-848
+          - Skein1024-856
+          - Skein1024-864
+          - Skein1024-872
+          - Skein1024-880
+          - Skein1024-888
+          - Skein1024-896
+          - Skein1024-904
+          - Skein1024-912
+          - Skein1024-920
+          - Skein1024-928
+          - Skein1024-936
+          - Skein1024-944
+          - Skein1024-952
+          - Skein1024-960
+          - Skein1024-968
+          - Skein1024-976
+          - Skein1024-984
+          - Skein1024-992
+          - Skein1024-1000
+          - Skein1024-1008
+          - Skein1024-1016
+          - Skein1024-1024
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+        x-constraint:
+          positive: true
+      - description: Flush the changes to disk immediately
+        in: query
+        name: flush
+        schema:
+          default: true
+          type: boolean
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              properties:
+                file:
+                  description: The file you wish to write
+                  format: binary
+                  type: string
+                  x-meta:
+                    swaggerType: file
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: The file you wish to write
+                  format: binary
+                  type: string
+                  x-meta:
+                    swaggerType: file
+      responses:
+        204:
+          content: {}
+          description: The file or directory was created
+        409:
+          content: {}
+          description: The file or directory already exists
+      summary: Create an MFS path
+      tags:
+      - files
+    put:
+      description: Updates a file or directory at the passed MFS path
+      operationId: putFilesPath
+      parameters:
+      - description: The MFS path you wish to update
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      - description: Make parent directories as needed
+        in: query
+        name: parents
+        schema:
+          default: false
+          type: boolean
+      - description: Use raw blocks for newly created leaf nodes
+        in: query
+        name: rawLeaves
+        schema:
+          default: false
+          type: boolean
+      - in: query
+        name: hashAlg
+        schema:
+          default: sha2-256
+          enum:
+          - id
+          - sha1
+          - sha2-256
+          - sha2-512
+          - dbl-sha2-256
+          - sha3-224
+          - sha3-256
+          - sha3-384
+          - sha3-512
+          - shake-128
+          - shake-256
+          - keccak-224
+          - keccak-256
+          - keccak-384
+          - keccak-512
+          - murmur3-128
+          - murmur3-32
+          - blake2b-8
+          - blake2b-16
+          - blake2b-24
+          - blake2b-32
+          - blake2b-40
+          - blake2b-48
+          - blake2b-56
+          - blake2b-64
+          - blake2b-72
+          - blake2b-80
+          - blake2b-88
+          - blake2b-96
+          - blake2b-104
+          - blake2b-112
+          - blake2b-120
+          - blake2b-128
+          - blake2b-136
+          - blake2b-144
+          - blake2b-152
+          - blake2b-160
+          - blake2b-168
+          - blake2b-176
+          - blake2b-184
+          - blake2b-192
+          - blake2b-200
+          - blake2b-208
+          - blake2b-216
+          - blake2b-224
+          - blake2b-232
+          - blake2b-240
+          - blake2b-248
+          - blake2b-256
+          - blake2b-264
+          - blake2b-272
+          - blake2b-280
+          - blake2b-288
+          - blake2b-296
+          - blake2b-304
+          - blake2b-312
+          - blake2b-320
+          - blake2b-328
+          - blake2b-336
+          - blake2b-344
+          - blake2b-352
+          - blake2b-360
+          - blake2b-368
+          - blake2b-376
+          - blake2b-384
+          - blake2b-392
+          - blake2b-400
+          - blake2b-408
+          - blake2b-416
+          - blake2b-424
+          - blake2b-432
+          - blake2b-440
+          - blake2b-448
+          - blake2b-456
+          - blake2b-464
+          - blake2b-472
+          - blake2b-480
+          - blake2b-488
+          - blake2b-496
+          - blake2b-504
+          - blake2b-512
+          - blake2s-8
+          - blake2s-16
+          - blake2s-24
+          - blake2s-32
+          - blake2s-40
+          - blake2s-48
+          - blake2s-56
+          - blake2s-64
+          - blake2s-72
+          - blake2s-80
+          - blake2s-88
+          - blake2s-96
+          - blake2s-104
+          - blake2s-112
+          - blake2s-120
+          - blake2s-128
+          - blake2s-136
+          - blake2s-144
+          - blake2s-152
+          - blake2s-160
+          - blake2s-168
+          - blake2s-176
+          - blake2s-184
+          - blake2s-192
+          - blake2s-200
+          - blake2s-208
+          - blake2s-216
+          - blake2s-224
+          - blake2s-232
+          - blake2s-240
+          - blake2s-248
+          - blake2s-256
+          - Skein256-8
+          - Skein256-16
+          - Skein256-24
+          - Skein256-32
+          - Skein256-40
+          - Skein256-48
+          - Skein256-56
+          - Skein256-64
+          - Skein256-72
+          - Skein256-80
+          - Skein256-88
+          - Skein256-96
+          - Skein256-104
+          - Skein256-112
+          - Skein256-120
+          - Skein256-128
+          - Skein256-136
+          - Skein256-144
+          - Skein256-152
+          - Skein256-160
+          - Skein256-168
+          - Skein256-176
+          - Skein256-184
+          - Skein256-192
+          - Skein256-200
+          - Skein256-208
+          - Skein256-216
+          - Skein256-224
+          - Skein256-232
+          - Skein256-240
+          - Skein256-248
+          - Skein256-256
+          - Skein512-8
+          - Skein512-16
+          - Skein512-24
+          - Skein512-32
+          - Skein512-40
+          - Skein512-48
+          - Skein512-56
+          - Skein512-64
+          - Skein512-72
+          - Skein512-80
+          - Skein512-88
+          - Skein512-96
+          - Skein512-104
+          - Skein512-112
+          - Skein512-120
+          - Skein512-128
+          - Skein512-136
+          - Skein512-144
+          - Skein512-152
+          - Skein512-160
+          - Skein512-168
+          - Skein512-176
+          - Skein512-184
+          - Skein512-192
+          - Skein512-200
+          - Skein512-208
+          - Skein512-216
+          - Skein512-224
+          - Skein512-232
+          - Skein512-240
+          - Skein512-248
+          - Skein512-256
+          - Skein512-264
+          - Skein512-272
+          - Skein512-280
+          - Skein512-288
+          - Skein512-296
+          - Skein512-304
+          - Skein512-312
+          - Skein512-320
+          - Skein512-328
+          - Skein512-336
+          - Skein512-344
+          - Skein512-352
+          - Skein512-360
+          - Skein512-368
+          - Skein512-376
+          - Skein512-384
+          - Skein512-392
+          - Skein512-400
+          - Skein512-408
+          - Skein512-416
+          - Skein512-424
+          - Skein512-432
+          - Skein512-440
+          - Skein512-448
+          - Skein512-456
+          - Skein512-464
+          - Skein512-472
+          - Skein512-480
+          - Skein512-488
+          - Skein512-496
+          - Skein512-504
+          - Skein512-512
+          - Skein1024-8
+          - Skein1024-16
+          - Skein1024-24
+          - Skein1024-32
+          - Skein1024-40
+          - Skein1024-48
+          - Skein1024-56
+          - Skein1024-64
+          - Skein1024-72
+          - Skein1024-80
+          - Skein1024-88
+          - Skein1024-96
+          - Skein1024-104
+          - Skein1024-112
+          - Skein1024-120
+          - Skein1024-128
+          - Skein1024-136
+          - Skein1024-144
+          - Skein1024-152
+          - Skein1024-160
+          - Skein1024-168
+          - Skein1024-176
+          - Skein1024-184
+          - Skein1024-192
+          - Skein1024-200
+          - Skein1024-208
+          - Skein1024-216
+          - Skein1024-224
+          - Skein1024-232
+          - Skein1024-240
+          - Skein1024-248
+          - Skein1024-256
+          - Skein1024-264
+          - Skein1024-272
+          - Skein1024-280
+          - Skein1024-288
+          - Skein1024-296
+          - Skein1024-304
+          - Skein1024-312
+          - Skein1024-320
+          - Skein1024-328
+          - Skein1024-336
+          - Skein1024-344
+          - Skein1024-352
+          - Skein1024-360
+          - Skein1024-368
+          - Skein1024-376
+          - Skein1024-384
+          - Skein1024-392
+          - Skein1024-400
+          - Skein1024-408
+          - Skein1024-416
+          - Skein1024-424
+          - Skein1024-432
+          - Skein1024-440
+          - Skein1024-448
+          - Skein1024-456
+          - Skein1024-464
+          - Skein1024-472
+          - Skein1024-480
+          - Skein1024-488
+          - Skein1024-496
+          - Skein1024-504
+          - Skein1024-512
+          - Skein1024-520
+          - Skein1024-528
+          - Skein1024-536
+          - Skein1024-544
+          - Skein1024-552
+          - Skein1024-560
+          - Skein1024-568
+          - Skein1024-576
+          - Skein1024-584
+          - Skein1024-592
+          - Skein1024-600
+          - Skein1024-608
+          - Skein1024-616
+          - Skein1024-624
+          - Skein1024-632
+          - Skein1024-640
+          - Skein1024-648
+          - Skein1024-656
+          - Skein1024-664
+          - Skein1024-672
+          - Skein1024-680
+          - Skein1024-688
+          - Skein1024-696
+          - Skein1024-704
+          - Skein1024-712
+          - Skein1024-720
+          - Skein1024-728
+          - Skein1024-736
+          - Skein1024-744
+          - Skein1024-752
+          - Skein1024-760
+          - Skein1024-768
+          - Skein1024-776
+          - Skein1024-784
+          - Skein1024-792
+          - Skein1024-800
+          - Skein1024-808
+          - Skein1024-816
+          - Skein1024-824
+          - Skein1024-832
+          - Skein1024-840
+          - Skein1024-848
+          - Skein1024-856
+          - Skein1024-864
+          - Skein1024-872
+          - Skein1024-880
+          - Skein1024-888
+          - Skein1024-896
+          - Skein1024-904
+          - Skein1024-912
+          - Skein1024-920
+          - Skein1024-928
+          - Skein1024-936
+          - Skein1024-944
+          - Skein1024-952
+          - Skein1024-960
+          - Skein1024-968
+          - Skein1024-976
+          - Skein1024-984
+          - Skein1024-992
+          - Skein1024-1000
+          - Skein1024-1008
+          - Skein1024-1016
+          - Skein1024-1024
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+        x-constraint:
+          positive: true
+      - description: Flush the changes to disk immediately
+        in: query
+        name: flush
+        schema:
+          default: true
+          type: boolean
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              properties:
+                file:
+                  description: The file you wish to write
+                  format: binary
+                  type: string
+                  x-meta:
+                    swaggerType: file
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: The file you wish to write
+                  format: binary
+                  type: string
+                  x-meta:
+                    swaggerType: file
+      responses:
+        204:
+          content: {}
+          description: The file or directory was created
+        409:
+          content: {}
+          description: The file or directory already exists
+      summary: Update an MFS path
+      tags:
+      - files
+  /name/{name}:
+    get:
+      operationId: resolve
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: recursive
+        schema:
+          default: false
+          type: boolean
+      - in: query
+        name: nocache
+        schema:
+          default: false
+          type: boolean
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+        404:
+          content: {}
+          description: The IPNS name could not be resolved
+      summary: Resolve an IPNS name
+      tags:
+      - name
+  /pubsub/topics:
+    get:
+      operationId: list
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Returns the list of topics the peer is subscribed to
+      tags:
+      - pubsub
+    post:
+      operationId: subscribe
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/subscribe-to-pubsub-topic-payload'
+        required: false
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Returns the list of topics the peer is subscribed to
+      tags:
+      - pubsub
+  /swarm/connections:
+    get:
+      operationId: addrs
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: List of known addresses of each peer connected
+      tags:
+      - swarm
+    post:
+      operationId: addrs
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/swam-connect-to-peer-payload'
+        required: false
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Open a connection to a given address
+      tags:
+      - swarm
+  /swarm/peer:
+    get:
+      operationId: info
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/peer'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/peer'
+          description: Successful
+      summary: Returns information about this peer
+      tags:
+      - swarm
+  /swarm/peers:
+    get:
+      operationId: addrs
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/remote-peers'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/remote-peers'
+          description: Successful
+      summary: List out the peers that we have connections with
+      tags:
+      - swarm
+  /bitswap/ledger/{peerId}:
+    get:
+      operationId: ledger
+      parameters:
+      - in: path
+        name: peerId
+        required: true
+        schema:
+          type: string
+      - description: Which number base to use when returning a CID
+        in: query
+        name: cidBase
+        schema:
+          default: base32
+          enum:
+          - base64
+          - base32
+          - base58btc
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 0
+            - 1
+            x-constraint:
+              positive: true
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 1
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 0
+          - 1
+          x-constraint:
+            positive: true
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 1
+          x-constraint:
+            positive: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bitswap-ledger'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/bitswap-ledger'
+          description: Successful
+        404:
+          content: {}
+          description: The peer id was not found
+      summary: Show the current ledger for a peer
+      tags:
+      - bitswap
+  /dht/peer/{peerId}:
+    get:
+      operationId: findPeer
+      parameters:
+      - description: The Peer ID that we wish to find info about
+        in: path
+        name: peerId
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Retrieve the Peer Info of a reachable node in the network
+      tags:
+      - dht
+  /dht/providers/{cid}:
+    get:
+      operationId: findProviders
+      parameters:
+      - description: The content id that we wish to find providers for
+        in: path
+        name: cid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: timeout
+        schema:
+          minimum: 0
+          type: integer
+      responses:
+        404:
+          content: {}
+          description: No provider could be found for the passed CID
+      summary: Retrieve the providers for content that is addressed by an hash
+      tags:
+      - dht
+  /dht/query/{peerId}:
+    get:
+      description: '''closest'' is defined by the rules of the underlying Peer Routing
+        mechanism'
+      operationId: query
+      parameters:
+      - description: An IPFS/libp2p peer ID
+        in: path
+        name: peerId
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Queries the network for the 'closest peers' to a given key
+      tags:
+      - dht
+  /dag:
+    post:
+      description: The dag API supports the creation and manipulation of dag-pb object, as well as other IPLD formats (i.e dag-cbor, ethereum-block, git, etc)
+      operationId: create
+      parameters:
+      - in: query
+        name: format
+        schema:
+          default: dag-cbor
+          enum:
+          - dag-cbor
+          - dag-pb
+          type: string
+      - in: query
+        name: hashAlg
+        schema:
+          default: sha2-256
+          enum:
+          - id
+          - sha1
+          - sha2-256
+          - sha2-512
+          - dbl-sha2-256
+          - sha3-224
+          - sha3-256
+          - sha3-384
+          - sha3-512
+          - shake-128
+          - shake-256
+          - keccak-224
+          - keccak-256
+          - keccak-384
+          - keccak-512
+          - murmur3-128
+          - murmur3-32
+          - blake2b-8
+          - blake2b-16
+          - blake2b-24
+          - blake2b-32
+          - blake2b-40
+          - blake2b-48
+          - blake2b-56
+          - blake2b-64
+          - blake2b-72
+          - blake2b-80
+          - blake2b-88
+          - blake2b-96
+          - blake2b-104
+          - blake2b-112
+          - blake2b-120
+          - blake2b-128
+          - blake2b-136
+          - blake2b-144
+          - blake2b-152
+          - blake2b-160
+          - blake2b-168
+          - blake2b-176
+          - blake2b-184
+          - blake2b-192
+          - blake2b-200
+          - blake2b-208
+          - blake2b-216
+          - blake2b-224
+          - blake2b-232
+          - blake2b-240
+          - blake2b-248
+          - blake2b-256
+          - blake2b-264
+          - blake2b-272
+          - blake2b-280
+          - blake2b-288
+          - blake2b-296
+          - blake2b-304
+          - blake2b-312
+          - blake2b-320
+          - blake2b-328
+          - blake2b-336
+          - blake2b-344
+          - blake2b-352
+          - blake2b-360
+          - blake2b-368
+          - blake2b-376
+          - blake2b-384
+          - blake2b-392
+          - blake2b-400
+          - blake2b-408
+          - blake2b-416
+          - blake2b-424
+          - blake2b-432
+          - blake2b-440
+          - blake2b-448
+          - blake2b-456
+          - blake2b-464
+          - blake2b-472
+          - blake2b-480
+          - blake2b-488
+          - blake2b-496
+          - blake2b-504
+          - blake2b-512
+          - blake2s-8
+          - blake2s-16
+          - blake2s-24
+          - blake2s-32
+          - blake2s-40
+          - blake2s-48
+          - blake2s-56
+          - blake2s-64
+          - blake2s-72
+          - blake2s-80
+          - blake2s-88
+          - blake2s-96
+          - blake2s-104
+          - blake2s-112
+          - blake2s-120
+          - blake2s-128
+          - blake2s-136
+          - blake2s-144
+          - blake2s-152
+          - blake2s-160
+          - blake2s-168
+          - blake2s-176
+          - blake2s-184
+          - blake2s-192
+          - blake2s-200
+          - blake2s-208
+          - blake2s-216
+          - blake2s-224
+          - blake2s-232
+          - blake2s-240
+          - blake2s-248
+          - blake2s-256
+          - Skein256-8
+          - Skein256-16
+          - Skein256-24
+          - Skein256-32
+          - Skein256-40
+          - Skein256-48
+          - Skein256-56
+          - Skein256-64
+          - Skein256-72
+          - Skein256-80
+          - Skein256-88
+          - Skein256-96
+          - Skein256-104
+          - Skein256-112
+          - Skein256-120
+          - Skein256-128
+          - Skein256-136
+          - Skein256-144
+          - Skein256-152
+          - Skein256-160
+          - Skein256-168
+          - Skein256-176
+          - Skein256-184
+          - Skein256-192
+          - Skein256-200
+          - Skein256-208
+          - Skein256-216
+          - Skein256-224
+          - Skein256-232
+          - Skein256-240
+          - Skein256-248
+          - Skein256-256
+          - Skein512-8
+          - Skein512-16
+          - Skein512-24
+          - Skein512-32
+          - Skein512-40
+          - Skein512-48
+          - Skein512-56
+          - Skein512-64
+          - Skein512-72
+          - Skein512-80
+          - Skein512-88
+          - Skein512-96
+          - Skein512-104
+          - Skein512-112
+          - Skein512-120
+          - Skein512-128
+          - Skein512-136
+          - Skein512-144
+          - Skein512-152
+          - Skein512-160
+          - Skein512-168
+          - Skein512-176
+          - Skein512-184
+          - Skein512-192
+          - Skein512-200
+          - Skein512-208
+          - Skein512-216
+          - Skein512-224
+          - Skein512-232
+          - Skein512-240
+          - Skein512-248
+          - Skein512-256
+          - Skein512-264
+          - Skein512-272
+          - Skein512-280
+          - Skein512-288
+          - Skein512-296
+          - Skein512-304
+          - Skein512-312
+          - Skein512-320
+          - Skein512-328
+          - Skein512-336
+          - Skein512-344
+          - Skein512-352
+          - Skein512-360
+          - Skein512-368
+          - Skein512-376
+          - Skein512-384
+          - Skein512-392
+          - Skein512-400
+          - Skein512-408
+          - Skein512-416
+          - Skein512-424
+          - Skein512-432
+          - Skein512-440
+          - Skein512-448
+          - Skein512-456
+          - Skein512-464
+          - Skein512-472
+          - Skein512-480
+          - Skein512-488
+          - Skein512-496
+          - Skein512-504
+          - Skein512-512
+          - Skein1024-8
+          - Skein1024-16
+          - Skein1024-24
+          - Skein1024-32
+          - Skein1024-40
+          - Skein1024-48
+          - Skein1024-56
+          - Skein1024-64
+          - Skein1024-72
+          - Skein1024-80
+          - Skein1024-88
+          - Skein1024-96
+          - Skein1024-104
+          - Skein1024-112
+          - Skein1024-120
+          - Skein1024-128
+          - Skein1024-136
+          - Skein1024-144
+          - Skein1024-152
+          - Skein1024-160
+          - Skein1024-168
+          - Skein1024-176
+          - Skein1024-184
+          - Skein1024-192
+          - Skein1024-200
+          - Skein1024-208
+          - Skein1024-216
+          - Skein1024-224
+          - Skein1024-232
+          - Skein1024-240
+          - Skein1024-248
+          - Skein1024-256
+          - Skein1024-264
+          - Skein1024-272
+          - Skein1024-280
+          - Skein1024-288
+          - Skein1024-296
+          - Skein1024-304
+          - Skein1024-312
+          - Skein1024-320
+          - Skein1024-328
+          - Skein1024-336
+          - Skein1024-344
+          - Skein1024-352
+          - Skein1024-360
+          - Skein1024-368
+          - Skein1024-376
+          - Skein1024-384
+          - Skein1024-392
+          - Skein1024-400
+          - Skein1024-408
+          - Skein1024-416
+          - Skein1024-424
+          - Skein1024-432
+          - Skein1024-440
+          - Skein1024-448
+          - Skein1024-456
+          - Skein1024-464
+          - Skein1024-472
+          - Skein1024-480
+          - Skein1024-488
+          - Skein1024-496
+          - Skein1024-504
+          - Skein1024-512
+          - Skein1024-520
+          - Skein1024-528
+          - Skein1024-536
+          - Skein1024-544
+          - Skein1024-552
+          - Skein1024-560
+          - Skein1024-568
+          - Skein1024-576
+          - Skein1024-584
+          - Skein1024-592
+          - Skein1024-600
+          - Skein1024-608
+          - Skein1024-616
+          - Skein1024-624
+          - Skein1024-632
+          - Skein1024-640
+          - Skein1024-648
+          - Skein1024-656
+          - Skein1024-664
+          - Skein1024-672
+          - Skein1024-680
+          - Skein1024-688
+          - Skein1024-696
+          - Skein1024-704
+          - Skein1024-712
+          - Skein1024-720
+          - Skein1024-728
+          - Skein1024-736
+          - Skein1024-744
+          - Skein1024-752
+          - Skein1024-760
+          - Skein1024-768
+          - Skein1024-776
+          - Skein1024-784
+          - Skein1024-792
+          - Skein1024-800
+          - Skein1024-808
+          - Skein1024-816
+          - Skein1024-824
+          - Skein1024-832
+          - Skein1024-840
+          - Skein1024-848
+          - Skein1024-856
+          - Skein1024-864
+          - Skein1024-872
+          - Skein1024-880
+          - Skein1024-888
+          - Skein1024-896
+          - Skein1024-904
+          - Skein1024-912
+          - Skein1024-920
+          - Skein1024-928
+          - Skein1024-936
+          - Skein1024-944
+          - Skein1024-952
+          - Skein1024-960
+          - Skein1024-968
+          - Skein1024-976
+          - Skein1024-984
+          - Skein1024-992
+          - Skein1024-1000
+          - Skein1024-1008
+          - Skein1024-1016
+          - Skein1024-1024
+          type: string
+      - description: Which CID version to use
+        in: query
+        name: cidVersion
+        schema:
+          default: 1
+          enum:
+          - 0
+          - 1
+          type: integer
+          x-constraint:
+            positive: true
+          x-alternatives:
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 0
+            - 1
+            x-constraint:
+              positive: true
+          - type: integer
+            description: Which CID version to use
+            default: 1
+            enum:
+            - 1
+            x-constraint:
+              positive: true
+        x-constraint:
+          positive: true
+        x-alternatives:
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 0
+          - 1
+          x-constraint:
+            positive: true
+        - type: integer
+          description: Which CID version to use
+          default: 1
+          enum:
+          - 1
+          x-constraint:
+            positive: true
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DAGNode'
+        required: false
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Store an IPLD format node
+      tags:
+      - dag
+  /name:
+    post:
+      operationId: publish
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ipns-options'
+        required: false
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ipns-record'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ipns-record'
+          description: Successful
+      summary: Publish an IPNS name with a given value
+      tags:
+      - name
+  /bitswap/reprovide:
+    post:
+      operationId: reprovide
+      responses:
+        204:
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: No Content
+      summary: Trigger reprovider
+      tags:
+      - bitswap
+  /dht/provide:
+    post:
+      operationId: provide
+      parameters:
+      - description: Recursively provide the entire graph
+        in: query
+        name: recursive
+        schema:
+          default: false
+          type: boolean
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model 1'
+        required: false
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Announce to the network that you are providing given values
+      tags:
+      - dht
+  /dht/{cid}:
+    post:
+      operationId: put
+      parameters:
+      - description: The content id you are storing
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/dht-value'
+        required: false
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Store a value on the DHT
+      tags:
+      - dht
+  /repo/gc:
+    post:
+      operationId: list
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Perform a garbage collection sweep on the repo
+      tags:
+      - repo
+  /swarm/peers/{peerId}/ping:
+    post:
+      description: Note that not all ping response objects are "pongs".<br/><br/>A "pong" message can be identified by a truthy success property and an empty text property.<br/><br/>Other ping responses are failures or status updates.
+      operationId: dns
+      parameters:
+      - in: path
+        name: peerId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ping-peer-payload'
+        required: false
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ping-responses'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ping-responses'
+          description: Successful
+        404:
+          content: {}
+          description: The DNS name could not be resolved
+      summary: Send echo request packets to IPFS hosts
+      tags:
+      - swarm
+  /key/{name}:
+    delete:
+      operationId: remove
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Remove a keypair
+      tags:
+      - key
+    patch:
+      operationId: rename
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/rename-keypair-payload'
+        required: false
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Rename a keypair
+      tags:
+      - key
+  /pins/{hash}:
+    delete:
+      operationId: remove
+      parameters:
+      - in: path
+        name: hash
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: recursive
+        schema:
+          default: true
+          type: boolean
+      responses:
+        204:
+          content: {}
+          description: The pin was removed
+        404:
+          content: {}
+          description: The pin could not be found
+      summary: Remove a hash from the pinset
+      tags:
+      - pins
+  /bitswap/wantlist/{cid}:
+    delete:
+      operationId: unwant
+      parameters:
+      - description: The CID to remove from the wantlist
+        in: path
+        name: cid
+        required: true
+        schema:
+          type: string
+      responses:
+        204:
+          content: {}
+          description: The block was removed from your wantlist
+        404:
+          content: {}
+          description: The block was not in your wantlist
+      summary: Remove a given block from your wantlist
+      tags:
+      - bitswap
+  /swarm/connections/{address}:
+    delete:
+      operationId: addrs
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+          description: Successful
+      summary: Close a connection to a given address
+      tags:
+      - swarm
+components:
+  schemas:
+    Model 1:
+      description: no-arrays
+      properties:
+        cids:
+          $ref: '#/components/schemas/cid-list'
+      type: object
+    bitswap-ledger:
+      example:
+        debtRatio: 0.80082819046101150206595775671303272247314453125
+        peer: peer
+        exchanges: 0
+        received: 0
+        sent: 0
+      properties:
+        peer:
+          type: string
+        debtRatio:
+          type: number
+        sent:
+          minimum: 0
+          type: integer
+        received:
+          minimum: 0
+          type: integer
+        exchanges:
+          minimum: 0
+          type: integer
+      type: object
+    update-config-body:
+      type: object
+    remote-peers:
+      items:
+        $ref: '#/components/schemas/remote-peer'
+      type: array
+    ping-responses:
+      items:
+        $ref: '#/components/schemas/pong'
+      type: array
+    peers:
+      items:
+        type: string
+      type: array
+    pins:
+      items:
+        $ref: '#/components/schemas/pin'
+      type: array
+    pong:
+      properties:
+        success:
+          type: boolean
+        time:
+          minimum: 0
+          type: integer
+        text:
+          type: string
+      type: object
+    unixfs-entry-summary:
+      properties:
+        name:
+          type: string
+        type:
+          enum:
+          - file
+          - directory
+          type: string
+        cid:
+          type: string
+        size:
+          type: integer
+      required:
+      - cid
+      - name
+      - type
+      type: object
+    generate-keypair-payload:
+      properties:
+        name:
+          type: string
+        pem:
+          description: 'base64 encoded PKCS #8 PEM file to import keypairs from'
+          type: string
+        password:
+          description: 'Password to PKCS #8 PEM file'
+          type: string
+      required:
+      - name
+      type: object
+    pin:
+      properties:
+        cid:
+          type: string
+        type:
+          default: all
+          enum:
+          - recursive
+          - direct
+          - indirect
+          type: string
+      required:
+      - cid
+      - type
+      type: object
+    peer:
+      example:
+        repoVersion: 0.80082819046101150206595775671303272247314453125
+        agentVersion: agentVersion
+        protocolVersion: protocolVersion
+        id: id
+        publicKey: publicKey
+      properties:
+        id:
+          type: string
+        publicKey:
+          type: string
+        addresses:
+          $ref: '#/components/schemas/peers'
+        agentVersion:
+          type: string
+        protocolVersion:
+          type: string
+        repoVersion:
+          type: number
+      required:
+      - addresses
+      - agentVersion
+      - id
+      - protocolVersion
+      - publicKey
+      type: object
+    cid-list:
+      description: The content IDs you are announcing
+      items:
+        type: string
+      type: array
+    ping-peer-payload:
+      properties:
+        count:
+          maximum: 5E+1
+          minimum: 1
+          type: number
+      type: object
+    links:
+      items:
+        $ref: '#/components/schemas/DAGLink'
+      type: array
+    DAGLink:
+      properties:
+        name:
+          type: string
+        size:
+          minimum: 0
+          type: integer
+        cid:
+          type: string
+      required:
+      - cid
+      type: object
+    unixfs-entry:
+      example:
+        withLocality: true
+        size: 1
+        cumulativeSize: 0
+        blocks: 6
+        sizeLocal: 5
+        type: file
+        local: true
+        cid: cid
+      properties:
+        cid:
+          type: string
+        type:
+          enum:
+          - file
+          - directory
+          type: string
+        cumulativeSize:
+          type: integer
+          x-constraint:
+            positive: true
+        blocks:
+          type: integer
+        size:
+          type: integer
+        withLocality:
+          type: boolean
+        local:
+          type: boolean
+        sizeLocal:
+          type: integer
+        contents:
+          $ref: '#/components/schemas/contents'
+      required:
+      - blocks
+      - cid
+      - cumulativeSize
+      - type
+      type: object
+    repo-stats:
+      example:
+        storageMax: 0
+        repoPath: repoPath
+        version: 0
+        repoSize: 0
+        numObjects: 0
+      properties:
+        numObjects:
+          minimum: 0
+          type: integer
+        repoSize:
+          minimum: 0
+          type: integer
+        repoPath:
+          type: string
+        version:
+          minimum: 0
+          type: integer
+        storageMax:
+          minimum: 0
+          type: integer
+      required:
+      - repoPath
+      type: object
+    subscribe-to-pubsub-topic-payload:
+      properties:
+        topic:
+          type: string
+        discover:
+          default: false
+          type: boolean
+      required:
+      - topic
+      type: object
+    blocks:
+      example:
+        received: 0
+        duplicate: 0
+        sent: 0
+      properties:
+        sent:
+          minimum: 0
+          type: integer
+        received:
+          minimum: 0
+          type: integer
+        duplicate:
+          minimum: 0
+          type: integer
+      type: object
+    bitswap-stats:
+      example:
+        data:
+          received: 0
+          duplicate: 0
+          sent: 0
+        blocks:
+          received: 0
+          duplicate: 0
+          sent: 0
+        provideBufferLength: 0
+      properties:
+        blocks:
+          $ref: '#/components/schemas/blocks'
+        data:
+          $ref: '#/components/schemas/blocks'
+        provideBufferLength:
+          minimum: 0
+          type: integer
+        peers:
+          $ref: '#/components/schemas/peers'
+        wantlist:
+          $ref: '#/components/schemas/peers'
+      type: object
+    dht-value:
+      properties:
+        value:
+          type: string
+      required:
+      - value
+      type: object
+    DAGNode:
+      properties:
+        data:
+          type: string
+        links:
+          $ref: '#/components/schemas/links'
+      type: object
+    ipns-record:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    ipns-options:
+      properties:
+        value:
+          type: string
+        resolve:
+          default: false
+          description: Resolve given path before publishing
+          type: boolean
+        lifetime:
+          default: 24h
+          description: Time duration of the record
+          type: string
+        ttl:
+          default: 24h
+          description: Time duration this record should be cached
+          type: string
+        key:
+          default: self
+          description: Name of the key to be used or Peer ID
+          type: string
+      required:
+      - value
+      type: object
+    swam-connect-to-peer-payload:
+      properties:
+        address:
+          type: string
+      required:
+      - address
+      type: object
+    contents:
+      description: a descripiton
+      items:
+        $ref: '#/components/schemas/unixfs-entry-summary'
+      type: array
+    create-pin-payload:
+      properties:
+        hash:
+          type: string
+      required:
+      - hash
+      type: object
+    remote-peer:
+      properties:
+        id:
+          type: string
+        address:
+          type: string
+        publicKey:
+          type: string
+        latency:
+          type: string
+      required:
+      - address
+      - id
+      type: object
+    rename-keypair-payload:
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
