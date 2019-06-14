@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "glue": "^5.0.0",
+    "@hapi/glue": "^6.1.0",
     "ipfs-rest-server": "^1.0.0",
     "ipfs-graphql-server": "^1.0.0"
   },

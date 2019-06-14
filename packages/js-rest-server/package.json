@@ -11,13 +11,13 @@
   "license": "MIT",
   "dependencies": {
     "async": "^2.6.1",
-    "boom": "^7.2.0",
+    "@hapi/boom": "^7.4.2",
     "cids": "~0.5.3",
-    "hapi-swagger": "achingbrain/hapi-swagger#remove-type-from-arrays-with-item-ref",
-    "inert": "^5.1.0",
+    "hapi-swagger": "~10.0.0",
+    "@hapi/inert": "^5.2.0",
     "ipfs": "~0.31.7",
     "multihashes": "~0.4.14",
-    "vision": "^5.3.3"
+    "@hapi/vision": "^5.5.2"
   },
   "devDependencies": {
     "aegir": "^15.1.0"

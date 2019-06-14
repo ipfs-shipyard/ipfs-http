@@ -5,8 +5,8 @@ const HapiSwagger = require('hapi-swagger')
 const routes = require('./routes')
 const IPFS = require('ipfs')
 const remote = require('ipfs-api')
-const Inert = require('inert')
-const Vision = require('vision')
+const Inert = require('@hapi/inert')
+const Vision = require('@hapi/vision')
 const log = require('debug')('ipfs:http:server')
 
 const getIpfs = async (options) => {
@@ -46,10 +46,9 @@ module.exports = {
           title: 'IPFS API Documentation',
           version: pkg.version,
         },
-        sortTags: 'name',
-        sortEndpoints: 'path',
-        definitionPrefix: 'useLabel',
-        jsonEditor: true
+        sortTags: 'alpha',
+        sortEndpoints: 'method',
+        definitionPrefix: 'useLabel'
       }
     }])
 
